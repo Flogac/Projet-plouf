@@ -1,24 +1,22 @@
+SOURCE = entree_sortie.c Netlist.c balayage.c Avl.c main.c
+OBJET = $(SOURCE:.c=.o)
+CC = gcc
 C_FLAGS = -std=c99 -g -Wall -Werror -pedantic -Wextra
+COMPIL = -ggdb -c
+LINK = -ggdb -o
 
-all: main
+all: depends main
 
-entree_sortie.o: entree_sortie.h entree_sortie.c
-	gcc -ggdb -lm -c $(CFLAGS) entree_sortie.c
+%.o: %.c
+	$(CC) $(COMPIL) $?
 
-Netlist.o: entree_sortie.h Netlist.h Netlist.c
-	gcc -ggdb -lm -c $(CFLAGS) Netlist.c
+depends: $(SOURCE)
+	$(CC) -MM $? > .depends
 
-balayage.o: Netlist.h balayage.h balayage.c
-	gcc -ggdb -lm -c $(CFLAGS) balayage.c
+-include .depends
 
-Avl.o : Avl.h Netlist.h Avl.c
-	gcc -ggdb -lm -c $(CFLAGS) Avl.c
-
-main.o:	entree_sortie.h Netlist.h balayage.h main.c
-	gcc -ggdb -lm -c $(CFLAGS) main.c
-
-main: entree_sortie.o Netlist.o balayage.o main.o Avl.o
-	gcc -ggdb -o main $(CFLAGS) Avl.o entree_sortie.o Netlist.o balayage.o main.o -lm
+main: $(OBJET)
+	$(CC) $(LINK) $@ $(CFLAGS) $?
 
 clean:
-	rm -f *.o main
+	rm -f *.o main .depends
