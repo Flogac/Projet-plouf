@@ -8,7 +8,7 @@ struct segment * seg ;
 struct cell_segment * suiv ;
 } Cell_segment ;
 
-typedef strcut cell_segment_num {
+typedef struct cell_segment_num {
     int i;
     struct cell_segment_num *suiv;
 }Cell_Segment_Num;
@@ -40,3 +40,27 @@ typedef struct netlist {
 int NbRes ; /* Nombre de reseaux */
 Reseau * * T_Res ; /* Tableau pointant sur chaque reseau */
 } Netlist ;
+
+/* Fonctions de creations des differentes structures */
+Cell_segment * Creer_Cell_segment() ;
+Cell_Segment_Num * Creer_Cell_Segment_num() ;
+Segment * Creer_Segment() ;
+Point *  Creer_Point() ;
+Reseau * Creer_Reseau() ;
+Netlist * Creer_Netlist() ;
+Segment * * Allocation_Tableau_Segments( int nombre_segments ) ;
+Point * * Allocation_Tableau_Points( int nombre_points ) ;
+Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ) ;
+
+
+/* Fonctions de liberations des differentes structures */
+void Liberation_Cell_Segment_Num( Cell_Segment_Num * libre ) ;
+void Liberation_Cell_Segment( Cell_Segment * libre ) ;
+void Liberation_Segment( Segment * libre ) ;
+void Liberation_Point( Point * libre ) ;
+void Liberation_Reseau( Reseau * libre ) ;
+void Libetation_Netlist( Netlist * libre ) ;
+
+
+/* Fonctions d'affichage de la structure netlist sous forme de .net */
+void print_netlist(netlist n, char* name);
