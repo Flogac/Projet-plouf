@@ -52,3 +52,21 @@ Point *  Creer_Point() ;
 Reseau * Creer_Reseau() ;
 
 Netlist * Creer_Netlist() ;
+
+Segment * * Allocation_Tableau_Segments( int nombre_segments ) ;
+
+Point * * Allocation_Tableau_Points( int nombre_points ) ;
+
+Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ) ;
+
+void Liberation_Cell_Segment_Num( Cell_Segment_Num * libre ) ;
+
+void Liberation_Cell_Segment( Cell_Segment * libre ) ;
+
+void Liberation_Segment( Segment * libre ) ;
+
+void Liberation_Point( Point * libre ) ;
+
+void Liberation_Reseau( Reseau * libre ) ;
+
+void Libetation_Netlist( Netlist * libre ) ;

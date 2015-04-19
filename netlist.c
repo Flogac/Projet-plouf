@@ -65,3 +65,95 @@ Netlist * Creer_Netlist(){
 
     return nouv;
 }
+
+Segment * * Allocation_Tableau_Segments( int nombre_segments ){
+    if( nombre_segments < 1 ) return NULL;
+
+    Segment * * tab;
+    int i;
+
+    tab = ( Segment * * ) malloc ( sizeof( Segment * ) );
+    for( i = 0 ; i < nombre_segments ; i++ ) tab[i] = NULL;
+
+    return tab;
+}
+
+Point * * Allocation_Tableau_Points( int nombre_points ){
+    if( nombre_points < 1 ) return NULL;
+
+    Point * * tab;
+    int i;
+
+    tab = ( Point * * ) malloc ( sizeof( Point * ) );
+    for( i = 0 ; i < nombre_points ; i++ ) tab[i] = NULL;
+
+    return tab;
+}
+
+Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ){
+    if( nombre_reseaux < 1 ) return NULL;
+
+    Reseau * * tab;
+    int i;
+
+    tab = ( Point * * ) malloc ( sizeof( Point * ) );
+    for( i = 0 ; i < nombre_reseaux ; i++ ) tab[i] = NULL;
+
+    return tab;
+}
+
+void Liberation_Cell_Segment_Num( Cell_Segment_Num * libre ){
+    if( libre == NULL ) return;
+
+    if( libre->suiv != NULL ) Liberation_Cell_Segment_Num( libre->suiv );
+
+    free( libre );
+}
+
+void Liberation_Cell_Segment( Cell_Segment * libre ){
+    if( libre == NULL ) return;
+
+    if( libre->suiv != NULL ) Liberation_Cell_Segment( libre->suiv );
+
+    free( libre );
+}
+
+void Liberation_Segment( Segment * libre ){
+    if( libre == NULL ) return;
+
+    Liberation_Cell_Segment( libre->Lintersec );
+
+    free( libre );
+}
+
+void Liberation_Point( Point * libre ){
+    if( libre == NULL ) return;
+
+    Liberation_Cell_Segment_Num( libre->Lincid );
+
+    free( libre );
+}
+
+void Liberation_Reseau( Reseau * libre ){
+    if( libre == NULL ) return;
+
+    int i;
+
+    for( i = 0 ; i < libre->NbPt ; i++ ) Liberation_Point( libre->T_Pt[i] );
+    for( i = 0 ; i < libre->NbSeg ; i++ ) Liberation_Segment( libre->T_Seg[i] );
+
+    free( libre->T_Pt );
+    free( libre->T_Seg );
+    free( libre );
+}
+
+void Libetation_Netlist( Netlist * libre ){
+    if( libre == NULL ) return;
+
+    int i;
+
+    for( i = 0 ; i < libre->NbRes ; i++ ) Liberation_Reseau( libre->T_Res[i] );
+
+    free( libre->T_Res );
+    free( libre );
+}
