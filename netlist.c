@@ -157,6 +157,31 @@ void Libetation_Netlist( Netlist * libre ){
     free( libre );
 }
 
+Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
+    if( nom_fichier_en_net == NULL ) return NULL;
+
+    Netlist * Net;
+    FILE * f;
+    Reseau * Net_Res;
+    int i , j;
+
+    f = fopen( nom_fichier_en_net );
+    Net = Creer_Netlist();
+
+    Net->NbRes = GetEntier( f );
+    SkipLine( f );
+    Net->T_Res = Allocation_Tableau_Reseaux( Net->NbRes );
+
+    for( i = 0 ; i < Net->NbRes ; i++ ){
+        Net->T_Res[i] = Creer_Reseau();
+        Net->T_Res[i]->NumRes = i;
+        Net->T_Res[i]->T_Pt = GetEntier( f );
+        Net->T_Res[i]->NbSeg = GetEntier( f );
+        SkipLine( f );
+        for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++)
+    }
+}
+
 void print_netlist(netlist n, char* name){
     int i,j,k;
     char* nom;
@@ -189,13 +214,13 @@ void print_netlist(netlist n, char* name){
                 r->NbSeg);
         for (j = 0; j < r->nbPt; j++){
             p = r->T_Seg[j];
-            fprintf(f, " %d %d %d",
+            fprintf(f, " %d %g %g",
                     j,
                     p->x,
                     p->y);
         }
         for(k = 0; k < r->nbSeg; k++){
-            s = r->T_Seg;
+            s = r->T_Seg[k];
             fprintf(" %d %d",
                     s->p1,
                     s->p2);

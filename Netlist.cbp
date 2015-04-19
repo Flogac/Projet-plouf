@@ -31,6 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="avl.h" />
+		<Unit filename="entree_sortie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="entree_sortie.h" />
+		<Unit filename="netlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="netlist.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
