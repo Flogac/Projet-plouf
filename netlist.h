@@ -8,7 +8,7 @@ struct segment * seg ;
 struct cell_segment * suiv ;
 } Cell_segment ;
 
-typedef strcut cell_segment_num {
+typedef struct cell_segment_num {
     int i;
     struct cell_segment_num *suiv;
 }Cell_Segment_Num;
@@ -40,3 +40,15 @@ typedef struct netlist {
 int NbRes ; /* Nombre de reseaux */
 Reseau * * T_Res ; /* Tableau pointant sur chaque reseau */
 } Netlist ;
+
+Cell_segment * Creer_Cell_segment() ;
+
+Cell_Segment_Num * Creer_Cell_Segment_num() ;
+
+Segment * Creer_Segment() ;
+
+Point *  Creer_Point() ;
+
+Reseau * Creer_Reseau() ;
+
+Netlist * Creer_Netlist() ;
