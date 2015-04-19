@@ -36,6 +36,10 @@ int NbPt ; /* Nombre de points de ce reseau */
 
 Point * * T_Pt ; /* Tableau de pointeurs sur chaque point de ce reseau */
 
+int NbSeg ; // Nombre de segments de ce réseau.
+
+Segment * * T_Seg ; // Tableau de poiteurs sur chaque segment de ce reseau.
+
 } Reseau ;
 
 typedef struct netlist {
