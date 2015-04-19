@@ -164,6 +164,8 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     FILE * f;
     Reseau * Net_Res;
     int i , j;
+    Cell_Segment_Num * incidence;
+    Cell_Segment_Num * temp_incidence;
 
     f = fopen( nom_fichier_en_net );
     Net = Creer_Netlist();
@@ -173,13 +175,65 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     Net->T_Res = Allocation_Tableau_Reseaux( Net->NbRes );
 
     for( i = 0 ; i < Net->NbRes ; i++ ){
+
         Net->T_Res[i] = Creer_Reseau();
         Net->T_Res[i]->NumRes = i;
         Net->T_Res[i]->T_Pt = GetEntier( f );
         Net->T_Res[i]->NbSeg = GetEntier( f );
         SkipLine( f );
-        for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++)
+
+        for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++){
+
+            GetEntier( f );
+            Net->T_Res[i]->T_Pt[j] = Creer_Point();
+            Net->T_Res[i]->T_Pt[j]->num_res = i;
+            Net->T_Res[i]->T_Pt[j]->x = GetEntier( f );
+            Net->T_Res[i]->T_Pt[j]->y = GetEntier( f );
+            SkipLine( f );
+
+        }
+
+        for( j = 0 ; j < Net->T_Res[i]->NbSeg ; j++){
+
+            Net->T_Res[i]->T_Seg[j] = Creer_Segment();
+            Net->T_Res[i]->T_Seg[j]->NumRes = i;
+            Net->T_Res[i]->T_Seg[j]->p1 = GetEntier( f );
+            Net->T_Res[i]->T_Seg[j]->p2 = GetEntier( f );
+            SkipLine( f );
+
+            if( Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->x
+             == Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->x
+             ) Net->T_Res[i]->T_Seg[j]->HouV = 1;
+
+            if( Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->y
+             == Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->y
+             ) Net->T_Res[i]->T_Seg[j]->HouV = 1;
+
+            incidence = Creer_Cell_Segment_num();
+            incidence->i = j;
+            temp_incidence = Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->Lincid;
+            if( temp_incidence ) while( temp->suiv ) temp_incidence = temp_incidence->suiv;
+            if( temp_incidence ){
+                temp_incidence->suiv = incidence;
+            } else {
+                    Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->Lincid = incidence;
+            }
+
+            incidence = Creer_Cell_Segment_num();
+            incidence->i = j;
+            temp_incidence = Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->Lincid;
+            if( temp_incidence ) while( temp->suiv ) temp_incidence = temp_incidence->suiv;
+            if( temp_incidence ){
+                temp_incidence->suiv = incidence;
+            } else {
+                    Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->Lincid = incidence;
+            }
+
+        }
+
     }
+
+    return Net;
 }
 
 void print_netlist(netlist n, char* name){
