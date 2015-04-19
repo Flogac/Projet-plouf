@@ -167,6 +167,7 @@ void print_netlist(netlist n, char* name){
 
     if (!n || !name){
         perror("print_netlist : your netlist is NULL or name is NULL");
+        return;
     }
 
     nom = malloc(sizeof(char*));
@@ -176,6 +177,7 @@ void print_netlist(netlist n, char* name){
     if (!f){
         perror("print_netlist : file cannot be open");
         free(nom);
+        return;
     }
 
     fprintf(f, "%d\n", n->NbRes);
