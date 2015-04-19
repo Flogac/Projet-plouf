@@ -8,6 +8,11 @@ struct segment * seg ;
 struct cell_segment * suiv ;
 } Cell_segment ;
 
+typedef strcut cell_segment_num {
+    int i;
+    struct cell_segment_num *suiv;
+}Cell_Segment_Num;
+
 typedef struct segment {
 int NumRes ; /* Numero du reseau auquel appartient ce segment*/
 int p1 , p2 ; /* Numero des points aux extremites du segment */
@@ -20,7 +25,7 @@ struct cell_segment * Lintersec ; /* Liste des segments en intersection */
 typedef struct point {
 double x , y ; /* Coordonnees du point */
 int num_res ; /* Numero du reseau contenant ce point = Index du tableau T_res*/
-Cell_segment * Lincid ; /* Liste des segments incidents a ce point */
+Cell_Segment_Num * Lincid ; /* Liste des segments incidents a ce point */
 } Point ;
 
 typedef struct reseau {
