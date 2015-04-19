@@ -221,7 +221,7 @@ void print_netlist(netlist n, char* name){
         }
         for(k = 0; k < r->nbSeg; k++){
             s = r->T_Seg[k];
-            fprintf(" %d %d",
+            fprintf(f, " %d %d",
                     s->p1,
                     s->p2);
         }
