@@ -9,3 +9,10 @@ void Creer_intersection( Segment * s1 , Segment * s2 ) ;
 
 void intersec_naif( Segment * * Tableau_Segments , int nombre_segments , Netlist * Net ) ;
 
+void Echanger( Extremite * * Tableau , int premier , int second ) ;
+
+int Partionner_Tableau_Extremite( Extremite * * Tableau , int premier , int dernier , int pivot ) ;
+
+void Tri_Rapide_Echeancier( Extremite * * Tableau , int premier , int dernier ) ;
+
+void Tri_Tableau_Echeancier( Extremite * * Tableau , int nombre_extremite ) ;

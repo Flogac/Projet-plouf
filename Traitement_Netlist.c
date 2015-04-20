@@ -157,3 +157,42 @@ tri_rapide(tableau T, entier premier, entier dernier)
     fin
 */
 
+void Echanger( Extremite * * Tableau , int premier , int second ){
+    if( !Tableau ) return;
+
+    Extremite * temp;
+
+    temp = Tableau[second];
+    Tableau[second] = Tableau[premier];
+    Tableau[premier] = temp;
+}
+
+int Partionner_Tableau_Extremite( Extremite * * Tableau , int premier , int dernier , int pivot ){
+    if( !Tableau ) return premier;
+
+    int i , j;
+
+    Echanger( Tableau , pivot , dernier );
+    j = premier;
+    for( i = premier ; i < dernier ; i++ ) if( Tableau[i]->x <= Tableau[dernier]->x ) Echanger( Tableau , i , j++ );
+    Echanger( Tableau , dernier , j );
+
+    return j;
+}
+
+void Tri_Rapide_Echeancier( Extremite * * Tableau , int premier , int dernier ){
+    if( !Tableau ) return;
+
+    int pivot;
+
+    if( Tableau[premier]->x < Tableau[dernier]->x ){
+        pivot = Partionner_Tableau_Extremite( Tableau , premier , dernier , premier );
+        Tri_Rapide_Echeancier( Tableau , premier , pivot - 1 );
+        Tri_Rapide_Echeancier( Tableau , pivot , dernier );
+    }
+
+}
+
+void Tri_Tableau_Echeancier( Extremite * * Tableau , int nombre_extremite ){
+    Tri_Rapide_Echeancier( Tableau , 0 , nombre_extremite );
+}

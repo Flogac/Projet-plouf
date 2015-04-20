@@ -75,6 +75,8 @@ void Liberation_Extremite( Extremite * libre ) ;
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ) ;
 
+Extremite * * Creer_Echeancier( Netlist * Net , int nombre_segments , Segment * * Tableau_Segments ) ;
+
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
 void print_netlist(Netlist* n, char* name);
 
