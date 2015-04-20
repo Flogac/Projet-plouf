@@ -21,3 +21,14 @@ int intersection(Netlist *N, Segment *s1, Segment *s2){
 
     return 1;
 }
+
+
+void Sauvegarde_intersection(Netlist* n, char* name){
+
+
+
+
+
+
+
+}
