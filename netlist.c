@@ -389,4 +389,3 @@ int nb_segment(Netlist* n){
     }
     return res;
 }
-

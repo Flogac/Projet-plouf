@@ -1,4 +1,4 @@
-SOURCE = entree_sortie.c netlist.c main.c Traitement_Netlist.c 
+SOURCE = entree_sortie.c netlist.c main.c Traitement_Netlist.c avl.c
 OBJET = $(SOURCE:.c=.o)
 CC = gcc
 C_FLAGS = -std=c99 -g -Wall -Werror -pedantic -Wextra
