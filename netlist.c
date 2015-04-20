@@ -233,6 +233,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
 
     }
 
+    fclose( f );
     return Net;
 }
 
