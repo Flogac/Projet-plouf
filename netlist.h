@@ -62,6 +62,7 @@ void Liberation_Point( Point * libre ) ;
 void Liberation_Reseau( Reseau * libre ) ;
 void Libetation_Netlist( Netlist * libre ) ;
 
+Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ) ;
 
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
 void print_netlist(Netlist* n, char* name);

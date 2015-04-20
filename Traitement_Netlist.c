@@ -1,3 +1,5 @@
+#include "Traitement_Netlist.h"
+
 int intersection(Netlist *N, Segment *s1, Segment *s2){
     if( !N || !s1 || !s2 ) return 0;
 
@@ -23,6 +25,7 @@ int intersection(Netlist *N, Segment *s1, Segment *s2){
 }
 
 
+<<<<<<< HEAD
 void Sauvegarde_intersection(Netlist* n, char* name){
 
 
@@ -32,3 +35,5 @@ void Sauvegarde_intersection(Netlist* n, char* name){
 
 
 }
+=======
+>>>>>>> 1752372dd851e027ccba6417d894c497fc83c4d6
