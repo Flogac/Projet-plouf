@@ -247,11 +247,11 @@ void print_netlist(Netlist* n, char* name){
     Segment* s;
     FILE* f;
 
-    if (n){
+    if ( !n ){
         perror("print_netlist : your netlist is NULL or name is NULL");
         return;
     }
-    nom = extension(name, ".net"); 
+    nom = extension(name, ".net");
 
     f = fopen(nom, "w");
     if (!f){
@@ -300,7 +300,7 @@ void VisuNetList(Netlist* n, char* name){
     }
 
     nom = malloc(sizeof(char*));
-    nom = extension(name, ".net"); 
+    nom = extension(name, ".net");
 
     f = fopen(nom, "w");
     if (!f){
