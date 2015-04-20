@@ -159,6 +159,9 @@ void Libetation_Netlist( Netlist * libre ){
     free( libre );
 }
 
+Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ){
+}
+
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     if( nom_fichier_en_net == NULL ) return NULL;
 
@@ -357,15 +360,4 @@ int nb_segment(Netlist* n){
     }
     return res;
 }
-
-
-
-
-
-
-
-
-
-
-
 
