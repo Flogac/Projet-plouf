@@ -191,7 +191,7 @@ pour chaque point r de E dans l'ordre croissant faire
         y1 <- ordonnée du point le plus bas de v
         y2 <- ordonnée du point le plus haut de v
         h <- Prem segment apres(y,T)
-        tant que h =NULL et ordonnee de h <= y2 faire
+        tant que h !=NULL et ordonnee de h <= y2 faire
             si h et v de réseaux différents alors
                 Ajouter h à Lintersec de v
                 Ajouter v à Lintersec de h
@@ -209,6 +209,8 @@ void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , 
     Cell_Segment * Liste_Segments_Balayes;
     int nombre_extremites;
     int i;
+    int y1, y2;
+    Segment * h;
 
     Echeancier = Creer_Echeancier( Net , nombre_segments , Tableau_Segments );
     nombre_extremites = 2 * nombre_segments;
