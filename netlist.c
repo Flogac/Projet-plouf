@@ -165,6 +165,8 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     Netlist * Net;
     FILE * f;
     Reseau * Net_Res;
+    Segment * Net_Seg;
+    Point * Net_Pt;
     int i , j;
     Cell_Segment_Num * incidence;
     Cell_Segment_Num * temp_incidence;
@@ -178,7 +180,8 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
 
     for( i = 0 ; i < Net->NbRes ; i++ ){
 
-        Net->T_Res[i] = Creer_Reseau();
+        Net_Res = Creer_Reseau();
+        Net->T_Res[i] = Net_Res;
         Net->T_Res[i]->NumRes = i;
         Net->T_Res[i]->NbPt = GetEntier( f );
         Net->T_Res[i]->NbSeg = GetEntier( f );
@@ -187,7 +190,8 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
         for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++){
 
             GetEntier( f );
-            Net->T_Res[i]->T_Pt[j] = Creer_Point();
+            Net_Pt = Creer_Point();
+            Net->T_Res[i]->T_Pt[j] = Net_Pt;
             Net->T_Res[i]->T_Pt[j]->num_res = i;
             Net->T_Res[i]->T_Pt[j]->x = GetEntier( f );
             Net->T_Res[i]->T_Pt[j]->y = GetEntier( f );
@@ -197,7 +201,8 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
 
         for( j = 0 ; j < Net->T_Res[i]->NbSeg ; j++){
 
-            Net->T_Res[i]->T_Seg[j] = Creer_Segment();
+            Net_Seg = Creer_Segment();
+            Net->T_Res[i]->T_Seg[j] = Net_Seg;
             Net->T_Res[i]->T_Seg[j]->NumRes = i;
             Net->T_Res[i]->T_Seg[j]->p1 = GetEntier( f );
             Net->T_Res[i]->T_Seg[j]->p2 = GetEntier( f );
@@ -313,7 +318,7 @@ void VisuNetList(Netlist* n, char* name){
         r = n->T_Res[i];
         for (j = 0; j < r->NbPt; j++){
             p = r->T_Pt[j];
-            fprintf(f, "%ld %ld 2.5 0 360 arc\n",
+            fprintf(f, "%g %g 2.5 0 360 arc\n",
                     p->x,
                     p->y);
             fprintf(f, "fill\n");
@@ -323,10 +328,10 @@ void VisuNetList(Netlist* n, char* name){
             s = r->T_Seg[k];
             p = r->T_Pt[s->p1];
             q = r->T_Pt[s->p2];
-            fprintf(f, "%ld %ld moveto\n",
+            fprintf(f, "%g %g moveto\n",
                     p->x,
                     p->y);
-            fprintf(f, "%ld %ld lineto\n",
+            fprintf(f, "%g %g lineto\n",
                     q->x,
                     q->y);
             fprintf(f, "stroke\n");

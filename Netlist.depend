@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1429532495 source:c:\users\florent\documents\github\projet-plouf\entree_sortie.c
+	"entree_sortie.h"
+	<string.h>
+	<ctype.h>
+
+1429532495 c:\users\florent\documents\github\projet-plouf\entree_sortie.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1429538282 source:c:\users\florent\documents\github\projet-plouf\netlist.c
+	"netlist.h"
+
+1429532495 c:\users\florent\documents\github\projet-plouf\netlist.h
+	<stdio.h>
+	<stdlib.h>
+	"entree_sortie.h"
+
+1429538106 source:c:\users\florent\documents\github\projet-plouf\traitement_netlist.c
+	"Traitement_Netlist.h"
+
+1429536860 c:\users\florent\documents\github\projet-plouf\traitement_netlist.h
+	"Netlist.h"
+
