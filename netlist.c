@@ -359,7 +359,6 @@ int nb_segment(Netlist* n){
 
     int i,res;
     Reseau *tmp;
-    Reseau *r;
 
     if (!n){
         perror("nb_segment : n == NULL");
