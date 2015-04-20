@@ -347,7 +347,7 @@ int nb_segment(Netlist* n){
     }
 
     for (i = n->NbRes; i > 0; i--){
-        tmp = T_Res[i];
+        tmp = n->T_Res[i];
         res = res + tmp->NbSeg;
     }
     return res;
