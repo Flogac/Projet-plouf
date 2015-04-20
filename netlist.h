@@ -61,6 +61,7 @@ Extremite * Creer_Extremite() ;
 Segment * * Allocation_Tableau_Segments( int nombre_segments ) ;
 Point * * Allocation_Tableau_Points( int nombre_points ) ;
 Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ) ;
+Extremite * * Allocation_Tableau_Extremite( int nombre_extremite ) ;
 
 
 /* Fonctions de liberations des differentes structures */

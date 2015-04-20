@@ -103,7 +103,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
                         ls->seg->p1,
                         ls->seg->p2);
             }
-            if (s->NumRes = ls->seg->NumRes){
+            if (s->NumRes == ls->seg->NumRes){
                 if (s->p1 < ls->seg->p1){
                     fprintf(f ,
                             "%d %d %d %d %d %d",
