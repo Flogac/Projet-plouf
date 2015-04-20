@@ -67,6 +67,18 @@ Netlist * Creer_Netlist(){
     return nouv;
 }
 
+Extremite * Creer_Extremite(){
+    Extremite * nouv;
+
+    nouv = ( Extremite * ) malloc ( sizeof( Extremite ) );
+    nouv->NumPt = -1;
+    nouv->PtrSeg = NULL;
+    nouv->VouGouD = -1;
+    nouv->x = -1;
+
+    return nouv;
+}
+
 Segment * * Allocation_Tableau_Segments( int nombre_segments ){
     if( nombre_segments < 1 ) return NULL;
 
@@ -157,6 +169,13 @@ void Libetation_Netlist( Netlist * libre ){
 
     free( libre->T_Res );
     free( libre );
+}
+
+void Liberation_Extremite( Extremite * libre ){
+    if( !libre ) return;
+
+    free( libre );
+    // LOLOLOLOLOLOLOLOLOLOLOLOL
 }
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ){
