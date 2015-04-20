@@ -20,3 +20,5 @@ main: $(OBJET)
 
 clean:
 	rm -f *.o main .depends
+
+.PHONY: all depends clean
