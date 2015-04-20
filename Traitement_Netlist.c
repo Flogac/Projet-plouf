@@ -63,25 +63,19 @@ void intersec_naif( Segment * * Tableau_Segments , int nombre_segments , Netlist
 void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
 
     int i;
-    char * nom;
-    Segment *s;
-    Cell_Segment *ls;
+    Segment *s, *ls;
+    Point *p;
     FILE* f;
 
-    if (!segp){
-        perror("Sauvegarde_intersection : your segp is NULL is NULL");
-        return;
-    }
-
-    if (!name){
-        perror("Sauvegarde_intersection : your name is NULL");
+    if (!n){
+        perror("Sauvegarde_intersection : your segp is NULL or name is NULL");
         return;
     }
 
     nom = malloc(sizeof(char*));
     nom = extension(name, ".int");
 
-    f = fopen(nom, "w");
+    f = fopen(name, "w");
     if (!f){
         perror("Sauvegarde_intersection : file cannot be open");
         free(name);
@@ -94,8 +88,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
 
         while (ls){
             if (s->NumRes < ls->seg->NumRes){
-                fprintf( f ,
-                        "%d %d %d %d %d %d",
+                fprintf(" %d %d %d %d %d %d",
                         s->NumRes,
                         s->p1,
                         s->p2,
@@ -105,8 +98,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
             }
             if (s->NumRes = ls->seg->NumRes){
                 if (s->p1 < ls->seg->p1){
-                    fprintf(f ,
-                            "%d %d %d %d %d %d",
+                    fprintf(" %d %d %d %d %d %d",
                             s->NumRes,
                             s->p1,
                             s->p2,
@@ -115,8 +107,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
                             ls->seg->p2);
                 }else{
                     if (s->p2 < ls->seg->p2){
-                        fprintf( f ,
-                                "%d %d %d %d %d %d",
+                        fprintf(" %d %d %d %d %d %d",
                                 s->NumRes,
                                 s->p1,
                                 s->p2,
@@ -129,10 +120,9 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
             }
             ls = ls->suiv;
         }
+        fclose(f);
+        return;
     }
-
-    fclose(f);
-    return;
 }
 
 /*
