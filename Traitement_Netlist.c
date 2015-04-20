@@ -1,6 +1,6 @@
 #include "Traitement_Netlist.h"
 
-int intersection(Netlist *N, Segment *s1, Segment *s2){
+int intersection( Netlist * N , Segment * s1 , Segment * s2 ){
     if( !N || !s1 || !s2 ) return 0;
 
     /*
@@ -27,28 +27,8 @@ int intersection(Netlist *N, Segment *s1, Segment *s2){
 void Creer_intersection( Segment * s1 , Segment * s2 ){
     if( !s1 || !s2 ) return;
 
-    Cell_Segment * temp;
-    Cell_Segment * temp_ajout;
-
-    temp_ajout = s1->Lintersec;
-    if( temp_ajout ) while( temp_ajout->suiv ) temp_ajout = temp_ajout->suiv;
-    temp = Creer_Cell_Segment();
-    if( !temp_ajout ){
-        temp->seg = s2;
-        s2->Lintersec = temp;
-    } else {
-       temp_ajout->suiv = temp;
-    }
-
-    temp_ajout = s2->Lintersec;
-    if( temp_ajout ) while( temp_ajout->suiv ) temp_ajout = temp_ajout->suiv;
-    temp = Creer_Cell_Segment();
-    if( !temp_ajout ){
-        temp->seg = s1;
-        s2->Lintersec = temp;
-    } else {
-       temp_ajout->suiv = temp;
-    }
+    s1->Lintersec = Inserer_Segment_Liste_Cell_Segment( s1->Lintersec , s2 , 0 );
+    s2->Lintersec = Inserer_Segment_Liste_Cell_Segment( s2->Lintersec , s1 , 0 );
 
 }
 
@@ -103,7 +83,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
                         ls->seg->p1,
                         ls->seg->p2);
             }
-            if (s->NumRes = ls->seg->NumRes){
+            if (s->NumRes == ls->seg->NumRes){
                 if (s->p1 < ls->seg->p1){
                     fprintf(f ,
                             "%d %d %d %d %d %d",
@@ -157,3 +137,107 @@ tri_rapide(tableau T, entier premier, entier dernier)
     fin
 */
 
+void Echanger( Extremite * * Tableau , int premier , int second ){
+    if( !Tableau ) return;
+
+    Extremite * temp;
+
+    temp = Tableau[second];
+    Tableau[second] = Tableau[premier];
+    Tableau[premier] = temp;
+}
+
+int Partionner_Tableau_Extremite( Extremite * * Tableau , int premier , int dernier , int pivot ){
+    if( !Tableau ) return premier;
+
+    int i , j;
+
+    Echanger( Tableau , pivot , dernier );
+    j = premier;
+    for( i = premier ; i < dernier ; i++ ) if( Tableau[i]->x <= Tableau[dernier]->x ) Echanger( Tableau , i , j++ );
+    Echanger( Tableau , dernier , j );
+
+    return j;
+}
+
+void Tri_Rapide_Echeancier( Extremite * * Tableau , int premier , int dernier ){
+    if( !Tableau ) return;
+
+    int pivot;
+
+    if( Tableau[premier]->x < Tableau[dernier]->x ){
+        pivot = Partionner_Tableau_Extremite( Tableau , premier , dernier , premier );
+        Tri_Rapide_Echeancier( Tableau , premier , pivot - 1 );
+        Tri_Rapide_Echeancier( Tableau , pivot , dernier );
+    }
+
+}
+
+void Tri_Tableau_Echeancier( Extremite * * Tableau , int nombre_extremite ){
+    Tri_Rapide_Echeancier( Tableau , 0 , nombre_extremite );
+}
+
+/*
+Créer l'échéancier E trié selon les abscisses
+T <- NULL ;
+pour chaque point r de E dans l'ordre croissant faire
+    si r est extrémité gauche d'un segment horizontal h alors
+        Insérer(h,T)
+    Fin
+    si r est extrémité droite d'un segment horizontal h alors
+        Supprimer(h,T)
+    Fin
+    si r est l'abscisse d'un segment vertical v alors
+        y1 <- ordonnée du point le plus bas de v
+        y2 <- ordonnée du point le plus haut de v
+        h <- Prem segment apres(y,T)
+        tant que h !=NULL et ordonnee de h <= y2 faire
+            si h et v de réseaux différents alors
+                Ajouter h à Lintersec de v
+                Ajouter v à Lintersec de h
+            Fin
+            h <- AuDessus(h,T)
+        Fin
+    Fin
+Fin
+*/
+
+void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , Segment * * Tableau_Segments){
+    if( !Net || nombre_segments < 1 ) return;
+
+    Extremite * * Echeancier;
+    Cell_Segment * Liste_Segments_Balayes;
+    Cell_Segment * temp_Liste_Segments_Balayes;
+    int nombre_extremites;
+    int i;
+    int y2;
+    Segment * h;
+
+    Echeancier = Creer_Echeancier( Net , nombre_segments , Tableau_Segments );
+    nombre_extremites = 2 * nombre_segments;
+    Tri_Tableau_Echeancier( Echeancier , nombre_extremites );
+    Liste_Segments_Balayes = NULL;
+
+    for ( i = 0 ; i < nombre_extremites ; i++ ){
+        if( Echeancier[i]->VouGouD == 1 ) Liste_Segments_Balayes = Inserer_Segment_Liste_Cell_Segment( Liste_Segments_Balayes , Echeancier[i]->PtrSeg , 0 );
+        if( Echeancier[i]->VouGouD == 2 ) Liste_Segments_Balayes = Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Liste_Segments_Balayes , Echeancier[i]->PtrSeg );
+        if( Echeancier[i]->VouGouD == 0 ) if( Liste_Segments_Balayes ){
+
+            temp_Liste_Segments_Balayes = Liste_Segments_Balayes;
+            y2 = Net->T_Res[Echeancier[i]->PtrSeg->NumRes]->T_Pt[Echeancier[i]->PtrSeg->p2]->y;
+
+            while( temp_Liste_Segments_Balayes ){
+
+                h = temp_Liste_Segments_Balayes->seg;
+                if( Net->T_Res[h->NumRes]->T_Pt[h->p1]->y <= y2
+                 && h->NumRes != Echeancier[i]->PtrSeg->NumRes ) Creer_intersection( h , Echeancier[i]->PtrSeg );
+                temp_Liste_Segments_Balayes = temp_Liste_Segments_Balayes->suiv;
+
+            }
+
+        }
+
+    }
+
+    Liberer_Echeancier( Echeancier , nombre_extremites );
+}

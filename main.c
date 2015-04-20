@@ -1,7 +1,7 @@
 #include "netlist.h"
 //#include "function.c"
 
-int main(void){
+int main(){
 
-    return 0;
+return 0;
 }

@@ -61,6 +61,7 @@ Extremite * Creer_Extremite() ;
 Segment * * Allocation_Tableau_Segments( int nombre_segments ) ;
 Point * * Allocation_Tableau_Points( int nombre_points ) ;
 Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ) ;
+Extremite * * Allocation_Tableau_Extremite( int nombre_extremite ) ;
 
 
 /* Fonctions de liberations des differentes structures */
@@ -74,7 +75,15 @@ void Liberation_Extremite( Extremite * libre ) ;
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ) ;
 
+Extremite * * Creer_Echeancier( Netlist * Net , int nombre_segments , Segment * * Tableau_Segments ) ;
+
+void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ) ;
+
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
 void print_netlist(Netlist* n, char* name);
 
 void VisuNetList(Netlist* n, char* name);
+
+Cell_Segment * Inserer_Segment_Liste_Cell_Segment( Cell_Segment * Liste , Segment * seg , int mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables ) ;
+
+Cell_Segment * Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Cell_Segment * Liste , Segment * seg ) ;
