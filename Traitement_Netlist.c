@@ -24,6 +24,42 @@ int intersection(Netlist *N, Segment *s1, Segment *s2){
     return 1;
 }
 
+void Creer_intersection( Segment * s1 , Segment * s2 ){
+    if( !s1 || !s2 ) return;
+
+    Cell_Segment * temp;
+    Cell_Segment * temp_ajout;
+
+    temp_ajout = s1->Lintersec;
+    if( temp_ajout ) while( temp_ajout->suiv ) temp_ajout = temp_ajout->suiv;
+    temp = Creer_Cell_Segment();
+    if( !temp_ajout ){
+        temp->seg = s2;
+        s2->Lintersec = temp;
+    } else {
+       temp_ajout->suiv = temp;
+    }
+
+    temp_ajout = s2->Lintersec;
+    if( temp_ajout ) while( temp_ajout->suiv ) temp_ajout = temp_ajout->suiv;
+    temp = Creer_Cell_Segment();
+    if( !temp_ajout ){
+        temp->seg = s1;
+        s2->Lintersec = temp;
+    } else {
+       temp_ajout->suiv = temp;
+    }
+
+}
+
+void intersec_naif( Segment * * Tableau_Segments , int nombre_segments , Netlist * Net ){
+    if( !Tableau_Segments || nombre_segments < 1 ) return;
+
+    int i, j;
+
+    for( i = 0 ; i < nombre_segments ; i++ ) for( j = i ; j < nombre_segments ; j++ ) if( intersection( Net , Tableau_Segments[i] , Tableau_Segments[j] ) == 1 ) Creer_intersection( Tableau_Segments[i] , Tableau_Segments[j] );
+}
+
 void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
 
     int i;
@@ -88,3 +124,5 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
         return;
     }
 }
+
+

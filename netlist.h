@@ -42,6 +42,14 @@ int NbRes ; /* Nombre de reseaux */
 Reseau * * T_Res ; /* Tableau pointant sur chaque reseau */
 } Netlist ;
 
+typedef struct extremite {
+double x; /* Ordonnee du point *//
+int VouGouD ; /* 0 si segment V / 1 si pt gauche d'un segment H / 2 si pt droit d'un
+segment H */
+Segment * PtrSeg ; /* Pointeur sur le segment correspondant a l'extremite */
+int NumPt ; /* si segment H: numero du point correspondant */
+} Extremite ;
+
 /* Fonctions de creations des differentes structures */
 Cell_Segment * Creer_Cell_segment() ;
 Cell_Segment_Num * Creer_Cell_Segment_num() ;
@@ -49,6 +57,7 @@ Segment * Creer_Segment() ;
 Point *  Creer_Point() ;
 Reseau * Creer_Reseau() ;
 Netlist * Creer_Netlist() ;
+Extremite * Creer_Extremite() ;
 Segment * * Allocation_Tableau_Segments( int nombre_segments ) ;
 Point * * Allocation_Tableau_Points( int nombre_points ) ;
 Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ) ;
@@ -61,6 +70,7 @@ void Liberation_Segment( Segment * libre ) ;
 void Liberation_Point( Point * libre ) ;
 void Liberation_Reseau( Reseau * libre ) ;
 void Libetation_Netlist( Netlist * libre ) ;
+void Liberation_Extremite( Extremite * libre ) ;
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ) ;
 
