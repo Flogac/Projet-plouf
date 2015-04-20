@@ -335,3 +335,32 @@ void VisuNetList(Netlist* n, char* name){
     fclose(f);
     return;
 }
+
+int nb_segment(Netlist* n){
+
+    int i,res;
+    Reseau *tmp;
+    Reseau *r;
+
+    if (!n){
+        perror("nb_segment : n == NULL");
+    }
+
+    for (i = n->NbRes; i > 0; i--){
+        tmp = T_Res[i];
+        res = res + tmp->NbSeg;
+    }
+    return res;
+}
+
+
+
+
+
+
+
+
+
+
+
+
