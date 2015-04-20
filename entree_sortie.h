@@ -22,3 +22,5 @@ int GetEntier(FILE *f);
 /* LECTURE ET TRANSFORMATION DE CARACTERES EN ENTIERS REELS */
 double GetReel(FILE *f);
 
+/* AJOUTE L'EXTENSION extension AU FICHIER name ET RENVOIE LA STRING COMPLETE */
+char* extension(char* name, char* extension);

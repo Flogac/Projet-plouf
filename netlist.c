@@ -1,6 +1,8 @@
-Cell_segment * Creer_Cell_segment(){
-    Cell_segment * nouv;
-    nouv = ( Cell_segment * ) malloc ( sizeof( Cell_segment ) );
+#include "netlist.h"
+
+Cell_Segment * Creer_Cell_Segment(){
+    Cell_Segment * nouv;
+    nouv = ( Cell_Segment * ) malloc ( sizeof( Cell_Segment ) );
     nouv->suiv = NULL;
     nouv->seg = NULL;
 
@@ -95,7 +97,7 @@ Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ){
     Reseau * * tab;
     int i;
 
-    tab = ( Point * * ) malloc ( sizeof( Point * ) );
+    tab = malloc ( sizeof( Reseau * ));
     for( i = 0 ; i < nombre_reseaux ; i++ ) tab[i] = NULL;
 
     return tab;
@@ -167,7 +169,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     Cell_Segment_Num * incidence;
     Cell_Segment_Num * temp_incidence;
 
-    f = fopen( nom_fichier_en_net );
+    f = fopen( nom_fichier_en_net, "w" );
     Net = Creer_Netlist();
 
     Net->NbRes = GetEntier( f );
@@ -178,7 +180,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
 
         Net->T_Res[i] = Creer_Reseau();
         Net->T_Res[i]->NumRes = i;
-        Net->T_Res[i]->T_Pt = GetEntier( f );
+        Net->T_Res[i]->NbPt = GetEntier( f );
         Net->T_Res[i]->NbSeg = GetEntier( f );
         SkipLine( f );
 
@@ -212,7 +214,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
             incidence = Creer_Cell_Segment_num();
             incidence->i = j;
             temp_incidence = Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->Lincid;
-            if( temp_incidence ) while( temp->suiv ) temp_incidence = temp_incidence->suiv;
+            if( temp_incidence ) while( temp_incidence->suiv ) temp_incidence = temp_incidence->suiv;
             if( temp_incidence ){
                 temp_incidence->suiv = incidence;
             } else {
@@ -222,7 +224,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
             incidence = Creer_Cell_Segment_num();
             incidence->i = j;
             temp_incidence = Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->Lincid;
-            if( temp_incidence ) while( temp->suiv ) temp_incidence = temp_incidence->suiv;
+            if( temp_incidence ) while( temp_incidence->suiv ) temp_incidence = temp_incidence->suiv;
             if( temp_incidence ){
                 temp_incidence->suiv = incidence;
             } else {
@@ -237,23 +239,21 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     return Net;
 }
 
-void print_netlist(netlist n, char* name){
+void print_netlist(Netlist* n, char* name){
     int i,j,k;
     char* nom;
-    Reseau r;
-    Point p;
-    Segment s;
+    Reseau* r;
+    Point* p;
+    Segment* s;
     FILE* f;
 
-    if (!n || !name){
+    if (n){
         perror("print_netlist : your netlist is NULL or name is NULL");
         return;
     }
+    nom = extension(name, ".net"); 
 
-    nom = malloc(sizeof(char*));
-    nom = strcat(strcat(nom, name),".net");
-
-    f = fopen(nom, w);
+    f = fopen(nom, "w");
     if (!f){
         perror("print_netlist : file cannot be open");
         free(nom);
@@ -262,23 +262,74 @@ void print_netlist(netlist n, char* name){
 
     fprintf(f, "%d\n", n->NbRes);
     for (i = 0; i < n->NbRes; i++){
-        r= n->T_Res[i];
+        r = n->T_Res[i];
         fprintf(f, "%d %d %d\n",
                 r->NumRes,
                 r->NbPt,
                 r->NbSeg);
-        for (j = 0; j < r->nbPt; j++){
-            p = r->T_Seg[j];
+        for (j = 0; j < r->NbPt; j++){
+            p = r->T_Pt[j];
             fprintf(f, " %d %g %g",
                     j,
                     p->x,
                     p->y);
         }
-        for(k = 0; k < r->nbSeg; k++){
+        for(k = 0; k < r->NbSeg; k++){
             s = r->T_Seg[k];
             fprintf(f, " %d %d",
                     s->p1,
                     s->p2);
+        }
+    }
+    fclose(f);
+    return;
+}
+
+void VisuNetList(Netlist* n, char* name){
+    int i,j,k;
+    char* nom;
+    Reseau* r;
+    Point* p;
+    Point* q;
+    Segment* s;
+    FILE* f;
+
+    if (!n){
+        perror("VisuNetList : your netlist is NULL or name is NULL");
+        return;
+    }
+
+    nom = malloc(sizeof(char*));
+    nom = extension(name, ".net"); 
+
+    f = fopen(nom, "w");
+    if (!f){
+        perror("VisuNetList : file cannot be open");
+        free(nom);
+        return;
+    }
+
+    for (i = 0; i < n->NbRes; i++){
+        r = n->T_Res[i];
+        for (j = 0; j < r->NbPt; j++){
+            p = r->T_Pt[j];
+            fprintf(f, "%ld %ld 2.5 0 360 arc\n",
+                    p->x,
+                    p->y);
+            fprintf(f, "fill\n");
+            fprintf(f, "stroke\n");
+        }
+        for(k = 0; k < r->NbSeg; k++){
+            s = r->T_Seg[k];
+            p = r->T_Pt[s->p1];
+            q = r->T_Pt[s->p2];
+            fprintf(f, "%ld %ld moveto\n",
+                    p->x,
+                    p->y);
+            fprintf(f, "%ld %ld lineto\n",
+                    q->x,
+                    q->y);
+            fprintf(f, "stroke\n");
         }
     }
     fclose(f);

@@ -1,22 +1,21 @@
-#include "netlist.c"
 
-void VisuNetList(netlist n){
+void VisuNetList(Netlist* n, char* name){
     int i,j,k;
     char* nom;
-    Reseau r;
-    Point p;
-    Segment s;
+    Reseau* r;
+    Point p,q;
+    Segment* s;
     FILE* f;
 
-    if (!n || !name){
+    if (!n){
         perror("VisuNetList : your netlist is NULL or name is NULL");
         return;
     }
 
     nom = malloc(sizeof(char*));
-    nom = strcat(strcat(nom, name),".ps");
+    nom = extension(name, ".net"); 
 
-    f = fopen(nom, w);
+    f = fopen(nom, "w");
     if (!f){
         perror("VisuNetList : file cannot be open");
         free(nom);
@@ -24,8 +23,8 @@ void VisuNetList(netlist n){
     }
 
     for (i = 0; i < n->NbRes; i++){
-        r= n->T_Res[i];
-        for (j = 0; j < r->nbPt; j++){
+        r = n->T_Res[i];
+        for (j = 0; j < r->NbPt; j++){
             p = r->T_Pt[j];
             fprintf(f, "%d %d 2.5 0 360 arc\n",
                     p->x,
@@ -33,14 +32,16 @@ void VisuNetList(netlist n){
             fprintf(f, "fill\n");
             fprintf(f, "stroke\n");
         }
-        for(k = 0; k < r->nbSeg; k++){
-            s = r->T_Seg;
-            fprintf(f, "%d %d moveto\n",
-                    r->T_pt[s->p1],
-                    sr->T_pt[s->p1]);
-            fprintf(f, "%d %d lineto\n",
-                    r->T_pt[s->p2],
-                    sr->T_pt[s->p2]);
+        for(k = 0; k < r->NbSeg; k++){
+            s = r->T_Seg[k];
+            p = r->T_Pt[s->p1];
+            q = r->T_Pt[s->p2];
+            fprintf(f, "%ld %ld moveto\n",
+                    p->x,
+                    p->y);
+            fprintf(f, "%ld %ld lineto\n",
+                    q->x,
+                    q->y);
             fprintf(f, "stroke\n");
         }
     }

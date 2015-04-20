@@ -1,16 +1,17 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "entree_sortie.h"
 
 struct segment ;
 
-typedef struct cell_segment {
+typedef struct Cell_Segment {
 struct segment * seg ;
-struct cell_segment * suiv ;
-} Cell_segment ;
+struct Cell_Segment * suiv ;
+} Cell_Segment ;
 
-typedef struct cell_segment_num {
+typedef struct Cell_Segment_num {
     int i;
-    struct cell_segment_num *suiv;
+    struct Cell_Segment_num *suiv;
 }Cell_Segment_Num;
 
 typedef struct segment {
@@ -19,7 +20,7 @@ int p1 , p2 ; /* Numero des points aux extremites du segment */
 /* En utilisant la numerotation de T_Pt */
 /* p1 est le point en bas a gauche par rapport a p2*/
 int HouV ; /* 0 si Horizontal et 1 si Vertical */
-struct cell_segment * Lintersec ; /* Liste des segments en intersection */
+struct Cell_Segment * Lintersec ; /* Liste des segments en intersection */
 } Segment ;
 
 typedef struct point {
@@ -42,7 +43,7 @@ Reseau * * T_Res ; /* Tableau pointant sur chaque reseau */
 } Netlist ;
 
 /* Fonctions de creations des differentes structures */
-Cell_segment * Creer_Cell_segment() ;
+Cell_Segment * Creer_Cell_segment() ;
 Cell_Segment_Num * Creer_Cell_Segment_num() ;
 Segment * Creer_Segment() ;
 Point *  Creer_Point() ;
@@ -63,4 +64,6 @@ void Libetation_Netlist( Netlist * libre ) ;
 
 
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
-void print_netlist(netlist n, char* name);
+void print_netlist(Netlist* n, char* name);
+
+void VisuNetList(Netlist* n, char* name);
