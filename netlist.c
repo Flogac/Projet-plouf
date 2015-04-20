@@ -160,6 +160,17 @@ void Libetation_Netlist( Netlist * libre ){
 }
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ){
+    if( !Net || nombre_segments > 0 );
+
+    Segment * * Tableau_Segments;
+    int i , j , k;
+
+    Tableau_Segments = ( Segment * * ) malloc ( sizeof( Segment * ) );
+    k = 0;
+
+    for( i = 0 ; i < Net->NbRes ; i++ ) for( j = 0 ; j < Net->T_Res[i]->NbSeg ; j++ ) Tableau_Segments[k++] = Net->T_Res[i]->T_Seg[j];
+
+    return Tableau_Segments;
 }
 
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
