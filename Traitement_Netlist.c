@@ -207,6 +207,7 @@ void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , 
 
     Extremite * * Echeancier;
     Cell_Segment * Liste_Segments_Balayes;
+    Cell_Segment * temp_Liste_Segments_Balayes;
     int nombre_extremites;
     int i;
     int y1, y2;
@@ -220,8 +221,24 @@ void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , 
     for ( i = 0 ; i < nombre_extremites ; i++ ){
         if( Echeancier[i]->VouGouD == 1 ) Liste_Segments_Balayes = Inserer_Segment_Liste_Cell_Segment( Liste_Segments_Balayes , Echeancier[i] , 0 );
         if( Echeancier[i]->VouGouD == 2 ) Liste_Segments_Balayes = Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Liste_Segments_Balayes , Echeancier[i] );
-        if( Echeancier[i]->VouGouD == 0 ){
+        if( Echeancier[i]->VouGouD == 0 ) if( Liste_Segments_Balayes ){
+
+            temp_Liste_Segments_Balayes = Liste_Segments_Balayes;
+            y1 = Net->T_Res[Echeancier[i]->PtrSeg->NumRes]->T_Pt[Echeancier[i]->PtrSeg->p1]->y;
+            y2 = Net->T_Res[Echeancier[i]->PtrSeg->NumRes]->T_Pt[Echeancier[i]->PtrSeg->p2]->y;
+
+            while( temp_Liste_Segments_Balayes ){
+
+                h = temp_Liste_Segments_Balayes->seg;
+                if( Net->T_Res[h->NumRes]->T_Pt[h->p1]->y <= y2
+                 && h->NumRes != Echeancier[i]->PtrSeg->NumRes ) Creer_intersection( h , Echeancier[i]->PtrSeg );
+                temp_Liste_Segments_Balayes = temp_Liste_Segments_Balayes->suiv;
+
+            }
 
         }
+
     }
+
+    Liberer_Echeancier( Echeancier , nombre_extremites );
 }

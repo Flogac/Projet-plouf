@@ -239,6 +239,14 @@ Extremite * * Creer_Echeancier( Netlist * Net , int nombre_segments , Segment * 
     return Echeancier;
 }
 
+void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ){
+    if( !Echeancier || nombre_extremites < 1 ) return;
+
+    int i;
+
+    for( i = 0 ; i < nombre_extremites ; i++ ) Liberation_Extremite( Echeancier[i] );
+}
+
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     if( nom_fichier_en_net == NULL ) return NULL;
 
