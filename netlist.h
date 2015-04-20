@@ -51,7 +51,7 @@ int NumPt ; /* si segment H: numero du point correspondant */
 } Extremite ;
 
 /* Fonctions de creations des differentes structures */
-Cell_Segment * Creer_Cell_segment() ;
+Cell_Segment * Creer_Cell_Segment() ;
 Cell_Segment_Num * Creer_Cell_Segment_num() ;
 Segment * Creer_Segment() ;
 Point *  Creer_Point() ;
