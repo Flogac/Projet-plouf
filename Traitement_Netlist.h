@@ -8,3 +8,4 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name);
 void Creer_intersection( Segment * s1 , Segment * s2 ) ;
 
 void intersec_naif( Segment * * Tableau_Segments , int nombre_segments , Netlist * Net ) ;
+

@@ -31,11 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Traitement_Netlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Traitement_Netlist.h" />
 		<Unit filename="avl.h" />
 		<Unit filename="entree_sortie.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="entree_sortie.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="netlist.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -156,3 +156,4 @@ tri_rapide(tableau T, entier premier, entier dernier)
         fin si
     fin
 */
+
