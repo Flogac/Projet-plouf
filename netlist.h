@@ -86,4 +86,4 @@ void VisuNetList(Netlist* n, char* name);
 
 Cell_Segment * Inserer_Segment_Liste_Cell_Segment( Cell_Segment * Liste , Segment * seg , int mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables ) ;
 
-Cell_Segment * Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Cell_Segment * Liste , Segment * seg )
+Cell_Segment * Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Cell_Segment * Liste , Segment * seg ) ;
