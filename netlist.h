@@ -79,10 +79,10 @@ Extremite * * Creer_Echeancier( Netlist * Net , int nombre_segments , Segment * 
 
 void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ) ;
 
+Netlist * Recuperer_Netlist( char * nom_fichier_en_net ) ;
+
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
 void print_netlist(Netlist* n, char* name);
-
-void VisuNetList(Netlist* n, char* name);
 
 Cell_Segment * Inserer_Segment_Liste_Cell_Segment( Cell_Segment * Liste , Segment * seg , int mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables ) ;
 
