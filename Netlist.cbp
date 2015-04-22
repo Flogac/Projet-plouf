@@ -31,10 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Fonctions_Programme.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Fonctions_Programme.h" />
 		<Unit filename="Traitement_Netlist.c">
 			<Option compilerVar="CC" />
 		</Unit>

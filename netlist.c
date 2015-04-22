@@ -378,6 +378,57 @@ void print_netlist(Netlist* n, char* name){
     return;
 }
 
+void VisuNetList(Netlist* n, char* name){
+    int i,j,k;
+    char* nom;
+    Reseau* r;
+    Point* p;
+    Point* q;
+    Segment* s;
+    FILE* f;
+
+    if (!n){
+        perror("VisuNetList : your netlist is NULL or name is NULL");
+        return;
+    }
+
+    nom = malloc(sizeof(char*));
+    nom = extension(name, ".net");
+
+    f = fopen(nom, "w");
+    if (!f){
+        perror("VisuNetList : file cannot be open");
+        free(nom);
+        return;
+    }
+
+    for (i = 0; i < n->NbRes; i++){
+        r = n->T_Res[i];
+        for (j = 0; j < r->NbPt; j++){
+            p = r->T_Pt[j];
+            fprintf(f, "%g %g 2.5 0 360 arc\n",
+                    p->x,
+                    p->y);
+            fprintf(f, "fill\n");
+            fprintf(f, "stroke\n");
+        }
+        for(k = 0; k < r->NbSeg; k++){
+            s = r->T_Seg[k];
+            p = r->T_Pt[s->p1];
+            q = r->T_Pt[s->p2];
+            fprintf(f, "%g %g moveto\n",
+                    p->x,
+                    p->y);
+            fprintf(f, "%g %g lineto\n",
+                    q->x,
+                    q->y);
+            fprintf(f, "stroke\n");
+        }
+    }
+    fclose(f);
+    return;
+}
+
 int nb_segment(Netlist* n){
 
     int i,res;
@@ -393,6 +444,8 @@ int nb_segment(Netlist* n){
     }
     return res;
 }
+<<<<<<< HEAD
+=======
 
 Cell_Segment * Inserer_Segment_Liste_Cell_Segment( Cell_Segment * Liste , Segment * seg , int mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables ){
     if( !Liste && mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables != 0 ) return NULL;
@@ -419,3 +472,4 @@ Cell_Segment * Supprimer_Cell_Segment_A_Partir_D_Un_Pointeur_Sur_Segment( Cell_S
     free( Liste );
     return temp;
 }
+>>>>>>> a45ec90cdf9c351e85e59e3d109e10fe6bf3a3ec
