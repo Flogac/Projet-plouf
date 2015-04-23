@@ -1,11 +1,13 @@
-#include "netlist.h"
 #include "Fonctions_Programme.h"
 //#include "function.c"
 
 int main(){
 
+Netlist * Net;
 
-VisuNetList(Recuperer_Netlist( "c1.net"),"c1");
+Net = Recuperer_Netlist( "c1.net");
+
+VisuNetList( Net ,"c1");
 
 return 0;
 }
