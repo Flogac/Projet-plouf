@@ -200,7 +200,11 @@ Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments 
     Tableau_Segments = Allocation_Tableau_Segments( nombre_segments );
     k = 0;
 
-    for( i = 0 ; i < Net->NbRes ; i++ ) for( j = 0 ; j < Net->T_Res[i]->NbSeg ; j++ ) Tableau_Segments[k++] = Net->T_Res[i]->T_Seg[j];
+    for( i = 0 ; i < Net->NbRes ; i++ ){
+        for( j = 0 ; j < Net->T_Res[i]->NbSeg ; j++ ){
+            Tableau_Segments[k++] = Net->T_Res[i]->T_Seg[j];
+        }
+    }
 
     return Tableau_Segments;
 }
@@ -401,14 +405,15 @@ void print_netlist(Netlist* n, char* name){
 
 int nb_segment(Netlist* n){
 
-    int i,res;
+    int i;
+    int res = 0;
     Reseau *tmp;
 
     if (!n){
         perror("nb_segment : n == NULL");
     }
 
-    for (i = n->NbRes; i > 0; i--){
+    for (i = 0; i < n->NbRes; i++){
         tmp = n->T_Res[i];
         res = res + tmp->NbSeg;
     }

@@ -75,6 +75,8 @@ void Equilibre(Avl* racine){
 
 Avl* Inserer_Element_Avl(Extremite* e, Avl* racine){
 
+    if (!e) return racine;
+
     Avl *tmp;
     Segment* s;
 
@@ -111,6 +113,8 @@ Avl* Noeud_Pour_Suppression(Avl *racine){
 
 Avl* Supprimer_Element_Avl(Extremite* e, Avl* racine){
 
+    if (!e) return racine;
+
     Avl *tmp;
     Avl *plus_petit;
     Segment *s;
@@ -140,6 +144,8 @@ Avl* Supprimer_Element_Avl(Extremite* e, Avl* racine){
 }
 
 void Intersection_Balayage_Avl_rec(Netlist* n, Avl* a, Segment* h, Extremite* e, int y2){
+
+    if (!a || !n || !h || !e) return;
 
     double y = n->T_Res[h->NumRes]->T_Pt[h->p1]->y;
     if (y <= y2 && h->NumRes != e->PtrSeg->NumRes){
@@ -182,8 +188,10 @@ void Intersection_Balayage_Avl( Netlist * n , int nombre_segments , Segment * * 
                 break;
             case 0:
                 Avl_tmp = Avl_Segments_Balayes;
-                y2 = n->T_Res[e->PtrSeg->NumRes]->T_Pt[e->PtrSeg->p2]->y;
-                Intersection_Balayage_Avl_rec(n, Avl_tmp,  Avl_tmp->seg, e, y2);
+                if (Avl_tmp){
+                    y2 = n->T_Res[e->PtrSeg->NumRes]->T_Pt[e->PtrSeg->p2]->y;
+                    Intersection_Balayage_Avl_rec(n, Avl_tmp,  Avl_tmp->seg, e, y2);
+                }
         }
         break;
     }
