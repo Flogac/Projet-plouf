@@ -139,18 +139,52 @@ Avl* Supprimer_Element_Avl(Extremite* e, Avl* racine){
     return racine;
 }
 
+void Intersection_Balayage_Avl_rec(Netlist* n, Avl* a, Segment* h, Extremite* e, int y2){
+
+    double y = n->T_Res[h->NumRes]->T_Pt[h->p1]->y;
+    if (y <= y2 && h->NumRes != e->PtrSeg->NumRes){
+        Creer_intersection(h, e->PtrSeg);
+    }
+
+    if(a->fg) Intersection_Balayage_Avl_rec(n, a->fg, h, e, y2);
+
+    if(a->fd) Intersection_Balayage_Avl_rec(n, a->fd, h, e, y2);
+
+    return;
+}
 
 
+void Intersection_Balayage_Avl( Netlist * n , int nombre_segments , Segment * * Tableau_Segments){
 
+    if ( !n || nombre_segments < 1 ) return;
 
+    int i;
+    Extremite * * Echeancier;
+    Extremite * e;
+    Avl * Avl_Segments_Balayes;
+    Avl * Avl_tmp;
+    int nombres_extremites;
+    double y2;
 
+    Echeancier = Creer_Echeancier(n, nombre_segments, Tableau_Segments);
+    nombres_extremites = 2 * nombre_segments;
+    Tri_Tableau_Echeancier(Echeancier, nombres_extremites);
+    Avl_Segments_Balayes = NULL;
 
-
-
-
-
-
-
-
-
-
+    for ( i = 0 ; i < nombres_extremites ; i++ ){
+        e = Echeancier[i];
+        switch (e->VouGouD){
+            case 1:
+                Avl_Segments_Balayes = Inserer_Element_Avl(e, Avl_Segments_Balayes);
+                break;
+            case 2:
+                Avl_Segments_Balayes = Supprimer_Element_Avl(e, Avl_Segments_Balayes);
+                break;
+            case 0:
+                Avl_tmp = Avl_Segments_Balayes;
+                y2 = n->T_Res[e->PtrSeg->NumRes]->T_Pt[e->PtrSeg->p2]->y;
+                Intersection_Balayage_Avl_rec(n, Avl_tmp,  Avl_tmp->seg, e, y2);
+        }
+        break;
+    }
+}

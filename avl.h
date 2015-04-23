@@ -37,3 +37,33 @@ Avl* Noeud_Pour_Suppression(Avl *racine);
 /* Supprime un element Extremite dans l'arbre et le reequilibre apres suppression. */
 Avl* Supprimer_Element_Avl(Extremite* e, Avl* racine);
 
+/* Fonction de recurssion pour la fonction Intersection_Balayage_Avl, elle va verifier h et l'ordonnee et va ajouter ou non les segments a leur intersect respectifs. */
+void Intersection_Balayage_Avl_rec(Netlist* n, Avl* a, Segment* h, Extremite* e, int y2);
+
+/* Fonction de balayage de l'Avl */
+void Intersection_Balayage_Avl( Netlist * n , int nombre_segments , Segment * * Tableau_Segments);
+
+/*
+Créer l'échéancier E trié selon les abscisses
+T <- NULL ;
+pour chaque point r de E dans l'ordre croissant faire
+    si r est extrémité gauche d'un segment horizontal h alors
+        Insérer(h,T)
+    Fin
+    si r est extrémité droite d'un segment horizontal h alors
+        Supprimer(h,T)
+    Fin
+    si r est l'abscisse d'un segment vertical v alors
+        y1 <- ordonnée du point le plus bas de v
+        y2 <- ordonnée du point le plus haut de v
+        h <- Prem segment apres(y,T)
+        tant que h !=NULL et ordonnee de h <= y2 faire
+            si h et v de réseaux différents alors
+                Ajouter h à Lintersec de v
+                Ajouter v à Lintersec de h
+            Fin
+            h <- AuDessus(h,T)
+        Fin
+    Fin
+Fin
+*/
