@@ -52,7 +52,7 @@ void Faire_Test_Intersection(){
     Tab = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
     if( option_scanf[0] == '1' ){ intersec_naif( Tab , nombre_segments , Net );
     }else if( option_scanf[0] == '2' ){ Intersection_Balayage_Liste_Chainee( Net , nombre_segments , Tab);
-    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tabà;
+    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tab);
     }else { printf("Vous auriez au moins pu vous donner la peine d'entrer une option valide.\n");
             printf( "Puisque c'est comme ça, je boude. Na!" );
             free( Tab );
@@ -75,7 +75,7 @@ void Faire_Test_Intersection(){
     Tab = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
     if( option_scanf[0] == '1' ){ intersec_naif( Tab , nombre_segments , Net );
     }else if( option_scanf[0] == '2' ){ Intersection_Balayage_Liste_Chainee( Net , nombre_segments , Tab);
-    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tabà;
+    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tab);
     }else { printf("Vous auriez au moins pu vous donner la peine d'entrer une option valide.\n");
             printf( "Puisque c'est comme ça, je boude. Na!" );
             free( Tab );

@@ -21,6 +21,7 @@ int p1 , p2 ; /* Numero des points aux extremites du segment */
 /* p1 est le point en bas a gauche par rapport a p2*/
 int HouV ; /* 0 si Horizontal et 1 si Vertical */
 struct Cell_Segment * Lintersec ; /* Liste des segments en intersection */
+int seg_iteratif;
 } Segment ;
 
 typedef struct point {
