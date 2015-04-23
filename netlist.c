@@ -28,6 +28,7 @@ Segment * Creer_Segment(){
     nouv->NumRes = -1;
     nouv->p1 = -1;
     nouv->p2 = -1;
+    nouv->seg_iteratif = -1;
 
     return nouv;
 }
@@ -314,6 +315,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
             Skip( f );
             Net->T_Res[i]->T_Seg[j]->p2 = GetEntier( f );
             SkipLine( f );
+            Net->T_Res[i]->T_Seg[j]->seg_iteratif;
 
             if( Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->x
              == Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->x
