@@ -23,4 +23,6 @@ int GetEntier(FILE *f);
 double GetReel(FILE *f);
 
 /* AJOUTE L'EXTENSION extension AU FICHIER name ET RENVOIE LA STRING COMPLETE */
-char* extension(char* name, char* extension);
+char* Extension(char* name, char* extension);
+
+char* Lire_Entree_Standard(char* extention);

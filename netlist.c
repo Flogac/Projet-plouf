@@ -172,7 +172,7 @@ void Liberation_Reseau( Reseau * libre ){
     free( libre );
 }
 
-void Libetation_Netlist( Netlist * libre ){
+void Liberation_Netlist( Netlist * libre ){
     if( libre == NULL ) return;
 
     int i;
@@ -269,9 +269,12 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     for( i = 0 ; i < Net->NbRes ; i++ ){
 
         Net_Res = Creer_Reseau();
+        GetEntier( f );
         Net->T_Res[i] = Net_Res;
         Net->T_Res[i]->NumRes = i;
+        Skip( f );
         Net->T_Res[i]->NbPt = GetEntier( f );
+        Skip( f );
         Net->T_Res[i]->T_Pt = Allocation_Tableau_Points( Net->T_Res[i]->NbPt );
         Net->T_Res[i]->NbSeg = GetEntier( f );
         Net->T_Res[i]->T_Seg = Allocation_Tableau_Segments( Net->T_Res[i]->NbSeg );
@@ -280,12 +283,14 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
 
         for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++){
 
+            Skip( f );
             GetEntier( f );
             Net_Pt = Creer_Point();
             Net->T_Res[i]->T_Pt[j] = Net_Pt;
             Net->T_Res[i]->T_Pt[j]->num_res = i;
-            Net->T_Res[i]->T_Pt[j]->x = GetEntier( f );
-            Net->T_Res[i]->T_Pt[j]->y = GetEntier( f );
+            Net->T_Res[i]->T_Pt[j]->x = GetReel( f );
+            Net->T_Res[i]->T_Pt[j]->y = GetReel( f );
+
             SkipLine( f );
 
         }
@@ -295,15 +300,10 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
             Net_Seg = Creer_Segment();
             Net->T_Res[i]->T_Seg[j] = Net_Seg;
             Net->T_Res[i]->T_Seg[j]->NumRes = i;
-            Skip( f );
             Net->T_Res[i]->T_Seg[j]->p1 = GetEntier( f );
             Skip( f );
             Net->T_Res[i]->T_Seg[j]->p2 = GetEntier( f );
             SkipLine( f );
-
-            printf ("%d %d\n",
-                Net->T_Res[i]->T_Seg[j]->p1,
-                Net->T_Res[i]->T_Seg[j]->p2);
 
             if( Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->x
              == Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->x
@@ -353,7 +353,7 @@ void print_netlist(Netlist* n, char* name){
         perror("print_netlist : your netlist is NULL or name is NULL");
         return;
     }
-    nom = extension(name, ".net");
+    nom = Extension(name, ".net");
 
     f = fopen(nom, "w");
     if (!f){

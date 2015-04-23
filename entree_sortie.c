@@ -132,12 +132,12 @@ double GetReel(f)
 }
 
 
-char* extension(char* name, char* extension){
+char* Extension(char* name, char* extension){
 
     int i,j;
     long name_long = strlen(name);
     long extension_long = strlen(extension);
-    char *nom = calloc(name_long+extension_long, sizeof(char));
+    char *nom = calloc(name_long, sizeof(char));
     // creation du nom du fichier
     for (i = 0; i < name_long; i++)
     {
@@ -147,5 +147,17 @@ char* extension(char* name, char* extension){
     for (j = 0; j < extension_long; j++){
         nom[i+j] = extension[j];
     }
+    return nom;
+}
+
+
+char* Lire_Entree_Standard(char* extension){
+
+    char* nom;
+
+    printf("Donnez le nom de votre fichier\n");
+    nom =  malloc(256*sizeof(char));
+    scanf("%s", nom);
+    nom = Extension(nom, extension);
     return nom;
 }

@@ -59,7 +59,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
     }
 
     nom = malloc(sizeof(char*));
-    nom = extension(name, ".int");
+    nom = Extension(name, ".int");
 
     f = fopen(nom, "w");
     if (!f){

@@ -1,26 +1,37 @@
 #include "Fonctions_Programme.h"
 
-void VisuNetList(Netlist* n, char* name){
+void VisuNetList(void){
     int i,j,k;
-    char* nom;
+    char* fichier_netlist;
+    char* fichier_ps;
+    Netlist* n;
     Reseau* r;
     Point* p;
     Point* q;
     Segment* s;
     FILE* f;
 
+    fichier_netlist = Lire_Entree_Standard(".net");
+    fichier_ps = Lire_Entree_Standard(".ps");
+
+    printf("%s %s\n", fichier_netlist, fichier_ps);
+
+    n = Recuperer_Netlist(fichier_netlist);
+
     if (!n){
-        perror("VisuNetList : your netlist is NULL or name is NULL");
+        perror("VisuNetList : netlist is NULL\n");
+        free(fichier_netlist);
+        free(fichier_ps);
+        Liberation_Netlist(n);
         return;
     }
 
-    nom = malloc(sizeof(char*));
-    nom = extension(name, ".net");
-
-    f = fopen(nom, "w");
+    f = fopen(fichier_ps, "w");
     if (!f){
-        perror("VisuNetList : file cannot be open");
-        free(nom);
+        free(fichier_netlist);
+        free(fichier_ps);
+        Liberation_Netlist(n);
+        perror("VisuNetList : file cannot be open\n");
         return;
     }
 
@@ -48,5 +59,6 @@ void VisuNetList(Netlist* n, char* name){
         }
     }
     fclose(f);
+    Liberation_Netlist(n);
     return;
 }

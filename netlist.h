@@ -70,7 +70,7 @@ void Liberation_Cell_Segment( Cell_Segment * libre ) ;
 void Liberation_Segment( Segment * libre ) ;
 void Liberation_Point( Point * libre ) ;
 void Liberation_Reseau( Reseau * libre ) ;
-void Libetation_Netlist( Netlist * libre ) ;
+void Liberation_Netlist( Netlist * libre ) ;
 void Liberation_Extremite( Extremite * libre ) ;
 
 Segment * * Creer_Tableau_Segments_Netlist( Netlist * Net , int nombre_segments ) ;

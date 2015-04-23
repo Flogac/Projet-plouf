@@ -3,11 +3,7 @@
 
 int main(){
 
-Netlist * Net;
-
-Net = Recuperer_Netlist( "c1.net");
-
-VisuNetList( Net ,"c1");
+VisuNetList();
 
 return 0;
 }
