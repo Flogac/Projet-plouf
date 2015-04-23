@@ -247,6 +247,16 @@ void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ){
     for( i = 0 ; i < nombre_extremites ; i++ ) Liberation_Extremite( Echeancier[i] );
 }
 
+int Minimum( int a , int b ){
+    if( a > b ) return b;
+    return a;
+}
+
+int Maximum( int a , int b ){
+    if( a < b ) return b;
+    return a;
+}
+
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     if( nom_fichier_en_net == NULL ) return NULL;
 

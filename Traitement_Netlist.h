@@ -19,4 +19,6 @@ void Tri_Tableau_Echeancier( Extremite * * Tableau , int nombre_extremite ) ;
 
 void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , Segment * * Tableau_Segments) ;
 
-void Coordonnees_max_min(int* xmax, int* ymax, int* xmin, int* ymin);
+void Coordonnees_Max_Min_Reseau( double * xmax , double * ymax , double * xmin , double * ymin , Reseau * Res ) ;
+
+void Coordonnees_Max_Min_Netlist( double * xmax , double * ymax , double * xmin , double * ymin , Netlist * Net ) ;

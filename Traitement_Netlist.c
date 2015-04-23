@@ -242,12 +242,23 @@ void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , 
     Liberer_Echeancier( Echeancier , nombre_extremites );
 }
 
+void Coordonnees_Max_Min_Reseau( double * xmax , double * ymax , double * xmin , double * ymin , Reseau * Res ){
+    if( !xmax || !ymax || !xmin || !ymin || !Res ) return;
 
+    int i;
 
-void Coordonnees_max_min(int* xmax, int* ymax, int* xmin, int* ymin){
+    for( i = 0 ; i < Res->NbPt ; i++ ){
+        *xmax = Maximum( *xmax , Res->T_Pt[i]->x );
+        *ymax = Maximum( *ymax , Res->T_Pt[i]->y );
+        *xmin = Minimum( *xmin , Res->T_Pt[i]->x );
+        *ymin = Minimum( *ymin , Res->T_Pt[i]->y );
+    }
+}
 
+void Coordonnees_Max_Min_Netlist( double * xmax , double * ymax , double * xmin , double * ymin , Netlist * Net ){
+    if( !xmax || !ymax || !xmin || !ymin || !Net ) return;
 
+    int i;
 
-
-
+    for( i = 0 ; i < Net->NbRes ; i++ ) Coordonnees_Max_Min_Reseau( xmax , ymax , xmin , ymin , Net->T_Res[i] );
 }
