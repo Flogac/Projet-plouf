@@ -3,7 +3,8 @@
 
 int main(){
 
-VisuNetList();
+//VisuNetList();
+
 
 return 0;
 }

@@ -32,6 +32,7 @@ void VisuNetList(void){
 int Ecrire_Fichier_Ps_Netlist(char* nom, Netlist* n){
 
     int i,j,k;
+    double x,y;
     double xmax = 0;
     double ymax = 0;
     double xmin = 0;
@@ -50,30 +51,36 @@ int Ecrire_Fichier_Ps_Netlist(char* nom, Netlist* n){
         fclose(f);
         return 1;
     }
-    XMAX = 595;
-    YMAX = 842;
+    XMAX = 585;
+    YMAX = 832;
     Coordonnees_Max_Min_Netlist(&xmax, &ymax, &xmin, &ymin, n);
 
     for (i = 0; i < n->NbRes; i++){
         r = n->T_Res[i];
         for (j = 0; j < r->NbPt; j++){
             p = r->T_Pt[j];
-            fprintf(f, "%g %g 2.5 0 360 arc\n",
-                    ((p->x * XMAX) / xmax),
-                    ((p->y * XMAX) / xmax));
+
+            x = (p->x * XMAX) / xmax + 5;
+            y = (p->y * YMAX) / ymax + 5;
+            fprintf(f, "%g %g 2.5 0 360 arc\n", x, y);
             fprintf(f, "fill\n");
+
             fprintf(f, "stroke\n");
         }
         for(k = 0; k < r->NbSeg; k++){
             s = r->T_Seg[k];
             p = r->T_Pt[s->p1];
             q = r->T_Pt[s->p2];
-            fprintf(f, "%g %g moveto\n",
-                    ((p->x * XMAX) / xmax),
-                    ((p->y * YMAX) / xmax));
-            fprintf(f, "%g %g lineto\n",
-                    ((q->x * XMAX) / xmax),
-                    ((q->y * YMAX) / ymax));
+
+            x = (p->x * XMAX) / xmax + 5;
+            y = (p->y * YMAX) / ymax + 5;
+            fprintf(f, "%g %g moveto\n", x, y);
+
+
+            x = (q->x * XMAX) / xmax + 5;
+            y = (q->y * YMAX) / ymax + 5;
+            fprintf(f, "%g %g lineto\n", x, y);
+
             fprintf(f, "stroke\n");
         }
     }
