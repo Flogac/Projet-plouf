@@ -259,7 +259,7 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
     Cell_Segment_Num * incidence;
     Cell_Segment_Num * temp_incidence;
 
-    f = fopen( nom_fichier_en_net, "w" );
+    f = fopen( nom_fichier_en_net, "r" );
     Net = Creer_Netlist();
 
     Net->NbRes = GetEntier( f );
