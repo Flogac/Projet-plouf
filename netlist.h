@@ -81,7 +81,7 @@ void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ) ;
 
 int Minimum( int a , int b ) ;
 
-int Maximum( int a , int b )
+int Maximum( int a , int b ) ;
 
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ) ;
 
