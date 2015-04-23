@@ -241,3 +241,13 @@ void Intersection_Balayage_Liste_Chainee( Netlist * Net , int nombre_segments , 
 
     Liberer_Echeancier( Echeancier , nombre_extremites );
 }
+
+
+
+void Coordonnees_max_min(int* xmax, int* ymax, int* xmin, int* ymin){
+
+
+
+
+
+}
