@@ -1,4 +1,4 @@
-#include "netlist.h"
+#include "Fonctions_Programme.h"
 
 void VisuNetList(Netlist* n, char* name){
     int i,j,k;

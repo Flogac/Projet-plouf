@@ -85,7 +85,7 @@ Segment * * Allocation_Tableau_Segments( int nombre_segments ){
     Segment * * tab;
     int i;
 
-    tab = ( Segment * * ) malloc ( sizeof( Segment * ) );
+    tab = ( Segment * * ) malloc ( sizeof( Segment * ) * nombre_segments );
     for( i = 0 ; i < nombre_segments ; i++ ) tab[i] = NULL;
 
     return tab;
@@ -97,7 +97,7 @@ Point * * Allocation_Tableau_Points( int nombre_points ){
     Point * * tab;
     int i;
 
-    tab = ( Point * * ) malloc ( sizeof( Point * ) );
+    tab = ( Point * * ) malloc ( sizeof( Point * ) * nombre_points);
     for( i = 0 ; i < nombre_points ; i++ ) tab[i] = NULL;
 
     return tab;
@@ -109,7 +109,7 @@ Reseau * * Allocation_Tableau_Reseaux( int nombre_reseaux ){
     Reseau * * tab;
     int i;
 
-    tab = malloc ( sizeof( Reseau * ));
+    tab = malloc ( sizeof( Reseau * ) * nombre_reseaux);
     for( i = 0 ; i < nombre_reseaux ; i++ ) tab[i] = NULL;
 
     return tab;
@@ -121,7 +121,7 @@ Extremite * * Allocation_Tableau_Extremite( int nombre_extremite ){
     Extremite * * tab;
     int i;
 
-    tab = malloc ( sizeof( Extremite * ));
+    tab = malloc ( sizeof( Extremite * ) * nombre_extremite);
     for( i = 0 ; i < nombre_extremite ; i++ ) tab[i] = NULL;
 
     return tab;
@@ -272,7 +272,10 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
         Net->T_Res[i] = Net_Res;
         Net->T_Res[i]->NumRes = i;
         Net->T_Res[i]->NbPt = GetEntier( f );
+        Net->T_Res[i]->T_Pt = Allocation_Tableau_Points( Net->T_Res[i]->NbPt );
         Net->T_Res[i]->NbSeg = GetEntier( f );
+        Net->T_Res[i]->T_Seg = Allocation_Tableau_Segments( Net->T_Res[i]->NbSeg );
+
         SkipLine( f );
 
         for( j = 0 ; j < Net->T_Res[i]->NbPt ; j++){
@@ -292,9 +295,15 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ){
             Net_Seg = Creer_Segment();
             Net->T_Res[i]->T_Seg[j] = Net_Seg;
             Net->T_Res[i]->T_Seg[j]->NumRes = i;
+            Skip( f );
             Net->T_Res[i]->T_Seg[j]->p1 = GetEntier( f );
+            Skip( f );
             Net->T_Res[i]->T_Seg[j]->p2 = GetEntier( f );
             SkipLine( f );
+
+            printf ("%d %d\n",
+                Net->T_Res[i]->T_Seg[j]->p1,
+                Net->T_Res[i]->T_Seg[j]->p2);
 
             if( Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p1]->x
              == Net->T_Res[i]->T_Pt[Net->T_Res[i]->T_Seg[j]->p2]->x

@@ -5,7 +5,7 @@ C_FLAGS = -std=c99 -g -Wall -Werror -pedantic -Wextra
 COMPIL = -ggdb -c
 LINK = -ggdb -o
 
-all: depends main
+all: clean depends main
 
 %.o: %.c
 	$(CC) $(COMPIL) $?
