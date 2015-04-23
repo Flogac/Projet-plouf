@@ -26,7 +26,7 @@ while( quitter == 0 ){
     if( choixmenu[0] == '0' ) printf( "Cette fonctionnalité n'a pas encore été implentée. LOLOLOLOLOLOLOL\n");
     if( choixmenu[0] == '1' ) printf( "Le programme est en construction.\n" );
     if( choixmenu[0] == '2' ) VisuNetList();
-    if( choixmenu[0] == '3' ) printf( "C'est pour bientôt.\n");
+    if( choixmenu[0] == '3' ) Faire_Test_Intersection();
     if( choixmenu[0] == '9' ){
         printf( "C'est si triste de nous quitter si tôt.\n" );
         quitter = 1;

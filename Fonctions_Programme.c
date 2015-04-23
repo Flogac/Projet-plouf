@@ -25,8 +25,70 @@ void VisuNetList(void){
         return;
     }
 
+    free(fichier_netlist);
+    free(fichier_ps);
     Liberation_Netlist(n);
     return;
+}
+
+void Faire_Test_Intersection(){
+    Netlist * Net;
+    char * nom_fichier;
+    char * option_scanf;
+    Segment * * Tab;
+    int nombre_segments;
+
+    printf( "Sali sali sala salut. Nous allons maintenant comparer la vitesse de d'utilisation de différents");
+    printf( "alorithmes de calcul d'intersection.");
+
+    option_scanf = ( char * ) malloc ( sizeof( char ) * 256 );
+    nom_fichier = Lire_Entree_Standard( ".net" );
+
+    Net = Recuperer_Netlist( nom_fichier );
+    printf( "Quel algorithme voulez-vous utiliser pour le premier test?\n");
+    printf("1 : Naïf\n2 : Balayage par liste chaînée\n3 : Balayage par AVL\n");
+    scanf( "%s" , option_scanf );
+    nombre_segments = nb_segment( Net );
+    Tab = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
+    if( option_scanf[0] == '1' ){ intersec_naif( Tab , nombre_segments , Net );
+    }else if( option_scanf[0] == '2' ){ Intersection_Balayage_Liste_Chainee( Net , nombre_segments , Tab);
+    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tabà;
+    }else { printf("Vous auriez au moins pu vous donner la peine d'entrer une option valide.\n");
+            printf( "Puisque c'est comme ça, je boude. Na!" );
+            free( Tab );
+            Liberation_Netlist( Net );
+            free( nom_fichier);
+            free( option_scanf );
+            exit( 666 );
+            }
+
+    free( Tab );
+    Liberation_Netlist( Net );
+    free( nom_fichier);
+    free( option_scanf );
+
+    Net = Recuperer_Netlist( nom_fichier );
+    printf( "Quel algorithme voulez-vous utiliser pour le second test?\n");
+    printf("1 : Naïf\n2 : Balayage par liste chaînée\n3 : Balayage par AVL\n");
+    scanf( "%s" , option_scanf );
+    nombre_segments = nb_segment( Net );
+    Tab = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
+    if( option_scanf[0] == '1' ){ intersec_naif( Tab , nombre_segments , Net );
+    }else if( option_scanf[0] == '2' ){ Intersection_Balayage_Liste_Chainee( Net , nombre_segments , Tab);
+    }else if( option_scanf[0] == '3' ){ Intersection_Balayage_Avl( Net , nombre_segments , Tabà;
+    }else { printf("Vous auriez au moins pu vous donner la peine d'entrer une option valide.\n");
+            printf( "Puisque c'est comme ça, je boude. Na!" );
+            free( Tab );
+            Liberation_Netlist( Net );
+            free( nom_fichier);
+            free( option_scanf );
+            exit( 666 );
+            }
+
+    free( Tab );
+    Liberation_Netlist( Net );
+    free( nom_fichier);
+    free( option_scanf );
 }
 
 int Ecrire_Fichier_Ps_Netlist(char* nom, Netlist* n){
