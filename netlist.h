@@ -79,6 +79,10 @@ Extremite * * Creer_Echeancier( Netlist * Net , int nombre_segments , Segment * 
 
 void Liberer_Echeancier( Extremite * * Echeancier , int nombre_extremites ) ;
 
+int Minimum( int a , int b ) ;
+
+int Maximum( int a , int b )
+
 Netlist * Recuperer_Netlist( char * nom_fichier_en_net ) ;
 
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
