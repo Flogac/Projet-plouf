@@ -204,7 +204,7 @@ void print_netlist(Netlist* n, char* name){
 void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
 
     int i;
-    char * nom;
+    //char * nom;
     Segment *s;
     Cell_Segment *ls;
     FILE* f;
@@ -218,11 +218,12 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
         perror("Sauvegarde_intersection : your name is NULL");
         return;
     }
-
+/*
     nom = malloc(sizeof(char*));
     nom = Extension(name, ".int");
-
-    f = fopen(nom, "w");
+*/
+ //   f = fopen(nom, "w");
+    f = fopen( name , "w" );
     if (!f){
         perror("Sauvegarde_intersection : file cannot be open");
         free(name);

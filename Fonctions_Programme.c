@@ -106,4 +106,26 @@ void Faire_Test_Intersection(){
 }
 
 void Debug(){
+    Netlist * Net;
+    char * nom_fichier;
+    char * nom_fichier_net;
+    char * nom_fichier_int;
+    int nombre_segments;
+    Segment * * Tableau_segments;
+
+    nom_fichier = demande_nom_fichier( NULL );
+    nom_fichier_int = ajout_extension_nom_fichier( nom_fichier , ".int" );
+    nom_fichier_net = ajout_extension_nom_fichier( nom_fichier , ".net" );
+
+    Net = Recuperer_Netlist( nom_fichier_net );
+    nombre_segments = nb_segment( Net );
+    Tableau_segments = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
+    Intersection_Balayage_Avl( Net , nombre_segments , Tableau_segments );
+    Sauvegarde_intersection( Tableau_segments , nombre_segments , nom_fichier_int );
+
+    Liberation_Netlist( Net );
+    free( Tableau_segments );
+    free( nom_fichier );
+    free( nom_fichier_int );
+    free( nom_fichier_net );
 }
