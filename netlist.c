@@ -284,8 +284,9 @@ Cell_Segment * Inserer_Segment_Liste_Cell_Segment( Cell_Segment * Liste , Segmen
     if( !seg ) return NULL;
 
     Cell_Segment * temp;
+    if( Liste ) Liste->suiv = Inserer_Segment_Liste_Cell_Segment( Liste->suiv , seg , mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables + 1 ) ;
 
-    if( !Liste || Inserer_Segment_Liste_Cell_Segment( Liste->suiv , seg , mettre_zero_ici_ne_pas_chercher_pourquoi_car_les_voix_de_la_recursion_sont_impenetrables + 1 ) == NULL ){
+    if( !Liste || Liste->suiv == NULL ){
         temp = Creer_Cell_Segment();
         temp->seg = seg;
     }
