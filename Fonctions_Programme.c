@@ -71,6 +71,7 @@ void Faire_Test_Intersection(){
             free( option_scanf );
             exit( 666 );
             }
+    printf( " Fini.\n" );
 
     free( Tab );
     Liberation_Netlist( Net );
@@ -95,6 +96,7 @@ void Faire_Test_Intersection(){
             free( option_scanf );
             exit( 666 );
             }
+    printf( " Fini.\n" );
 
     free( Tab );
     Liberation_Netlist( Net );
@@ -160,4 +162,7 @@ int Ecrire_Fichier_Ps_Netlist(char* nom, Netlist* n){
     }
     fclose(f);
     return 0;
+}
+
+void Debug(){
 }

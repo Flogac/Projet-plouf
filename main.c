@@ -17,6 +17,7 @@ while( quitter == 0 ){
     printf( "1 Programme fini\n");
     printf( "2 VisuNetList\n");
     printf( "3 Test intersections\n" );
+    printf( "8 Debug lors de la programmation\n" );
     printf( "9 Quitter\n");
     printf( "Nous allons maintenant procéder à la saisie. Tout caractère superflu ne sera pas pris en compte.");
     printf( "Tout caractère non proposé sera considéré comme une demande de réécrire le menu.\n");
@@ -27,6 +28,7 @@ while( quitter == 0 ){
     if( choixmenu[0] == '1' ) printf( "Le programme est en construction.\n" );
     if( choixmenu[0] == '2' ) VisuNetList();
     if( choixmenu[0] == '3' ) Faire_Test_Intersection();
+    if( choixmenu[0] == '8' ) Debug();
     if( choixmenu[0] == '9' ){
         printf( "C'est si triste de nous quitter si tôt.\n" );
         quitter = 1;
