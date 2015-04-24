@@ -231,13 +231,13 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
     }
 
     for (i = 0; i < NbSeg; i++){
-        s = segp[0];
+        s = segp[i];
         ls = s->Lintersec;
 
         while (ls){
             if (s->NumRes < ls->seg->NumRes){
                 fprintf( f ,
-                        "%d %d %d %d %d %d",
+                        "%d %d %d %d %d %d\n",
                         s->NumRes,
                         s->p1,
                         s->p2,
@@ -248,7 +248,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
             if (s->NumRes == ls->seg->NumRes){
                 if (s->p1 < ls->seg->p1){
                     fprintf(f ,
-                            "%d %d %d %d %d %d",
+                            "%d %d %d %d %d %d\n",
                             s->NumRes,
                             s->p1,
                             s->p2,
@@ -258,7 +258,7 @@ void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name){
                 }else{
                     if (s->p2 < ls->seg->p2){
                         fprintf( f ,
-                                "%d %d %d %d %d %d",
+                                "%d %d %d %d %d %d\n",
                                 s->NumRes,
                                 s->p1,
                                 s->p2,
