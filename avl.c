@@ -7,6 +7,7 @@ Avl* Creer_Avl(){
     nouv->fd = NULL;
     nouv->clef = -1;
     nouv->seg = NULL;
+    return nouv;
 }
 
 void Liberation_Avl(Avl *racine){
@@ -78,7 +79,6 @@ Avl* Inserer_Element_Avl(Extremite* e, Avl* racine){
     if (!e) return racine;
 
     Avl *tmp;
-    Segment* s;
 
     if (!racine){
         tmp = Creer_Avl();
@@ -125,7 +125,7 @@ Avl* Supprimer_Element_Avl(Extremite* e, Avl* racine){
     if (e->x == racine->clef){
         s = racine->seg;
         extremite_s = e->PtrSeg;
-        if (s = extremite_s){
+        if (s == extremite_s){
             plus_petit = Noeud_Pour_Suppression(racine);
             tmp = racine;
             racine = plus_petit;

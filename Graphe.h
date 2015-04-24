@@ -1,4 +1,4 @@
-#include "Traitement_Netlist.h"
+#include "avl.h"
 
 typedef struct sommet_graphe{
     int type; // 1 Si segment, 2 si point.

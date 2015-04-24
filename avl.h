@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "netlist.h"
+#include "Traitement_Netlist.h"
 
 typedef struct _AVL{
     double clef;

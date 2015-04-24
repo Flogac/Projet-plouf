@@ -43,6 +43,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Traitement_Netlist.h" />
+		<Unit filename="avl.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="avl.h" />
 		<Unit filename="entree_sortie.c">
 			<Option compilerVar="CC" />
