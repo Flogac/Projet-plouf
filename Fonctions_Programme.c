@@ -6,8 +6,10 @@ void VisuNetList(void){
     char* fichier_ps;
     Netlist* n;
 
-    fichier_netlist = Lire_Entree_Standard(".net");
-    fichier_ps = Lire_Entree_Standard(".ps");
+    //fichier_netlist = Lire_Entree_Standard(".net");
+    fichier_netlist = demande_nom_fichier( ".net" );
+    //fichier_ps = Lire_Entree_Standard(".ps");
+    fichier_ps = demande_nom_fichier( ".ps");
     n = Recuperer_Netlist(fichier_netlist);
 
     if (!n){

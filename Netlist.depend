@@ -23,14 +23,15 @@
 1429807463 c:\users\florent\documents\github\projet-plouf\traitement_netlist.h
 	"netlist.h"
 
-1429881202 source:c:\users\florent\documents\github\projet-plouf\fonctions_programme.c
+1429883431 source:c:\users\florent\documents\github\projet-plouf\fonctions_programme.c
 	"Fonctions_Programme.h"
 
 1429809219 source:c:\users\florent\documents\github\projet-plouf\main.c
 	"Fonctions_Programme.h"
 
-1429821952 c:\users\florent\documents\github\projet-plouf\fonctions_programme.h
+1429883375 c:\users\florent\documents\github\projet-plouf\fonctions_programme.h
 	"Graphe.h"
+	"Lecture_fichier.h"
 
 1429881058 source:c:\users\florent\documents\github\projet-plouf\avl.c
 	"avl.h"
@@ -45,4 +46,13 @@
 
 1429881164 source:c:\users\florent\documents\github\projet-plouf\graphe.c
 	"Graphe.h"
+
+1429102829 c:\users\florent\documents\github\projet-plouf\lecture_fichier.h
+	"entree_sortie.h"
+	<stdio.h>
+
+1429036833 source:c:\users\florent\documents\github\projet-plouf\lecture_fichier.c
+	"Lecture_fichier.h"
+	<stdio.h>
+	<string.h>
 
