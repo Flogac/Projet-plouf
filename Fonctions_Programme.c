@@ -76,6 +76,7 @@ void Faire_Test_Intersection(){
     Liberation_Netlist( Net );
     free( option_scanf );
 
+    option_scanf = ( char * ) malloc ( sizeof( char ) * 256 );
     Net = Recuperer_Netlist( nom_fichier_net );
     printf( "Quel algorithme voulez-vous utiliser pour le second test?\n");
     printf("1 : Naïf\n2 : Balayage par liste chaînée\n3 : Balayage par AVL\n");
