@@ -2,14 +2,19 @@
 
 void VisuNetList(void){
 
+    char * nomfichier;
     char* fichier_netlist;
     char* fichier_ps;
     Netlist* n;
 
     //fichier_netlist = Lire_Entree_Standard(".net");
-    fichier_netlist = demande_nom_fichier( ".net" );
     //fichier_ps = Lire_Entree_Standard(".ps");
-    fichier_ps = demande_nom_fichier( ".ps");
+    nomfichier = demande_nom_fichier( NULL );
+    fichier_netlist = ajout_extension_nom_fichier( nomfichier , ".net" );
+    free( nomfichier );
+    nomfichier = demande_nom_fichier( NULL );
+    fichier_ps = ajout_extension_nom_fichier( nomfichier , ".ps" );
+    free( nomfichier );
     n = Recuperer_Netlist(fichier_netlist);
 
     if (!n){
