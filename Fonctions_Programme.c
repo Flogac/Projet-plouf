@@ -66,6 +66,7 @@ void Faire_Test_Intersection(){
             printf( "Puisque c'est comme ça, je boude. Na!" );
             free( Tab );
             Liberation_Netlist( Net );
+            free( nom_fichier_net);
             free( nom_fichier);
             free( option_scanf );
             exit( 666 );
@@ -73,7 +74,6 @@ void Faire_Test_Intersection(){
 
     free( Tab );
     Liberation_Netlist( Net );
-    free( nom_fichier);
     free( option_scanf );
 
     Net = Recuperer_Netlist( nom_fichier_net );
@@ -89,6 +89,7 @@ void Faire_Test_Intersection(){
             printf( "Puisque c'est comme ça, je boude. Na!" );
             free( Tab );
             Liberation_Netlist( Net );
+            free( nom_fichier_net);
             free( nom_fichier);
             free( option_scanf );
             exit( 666 );
@@ -97,6 +98,7 @@ void Faire_Test_Intersection(){
     free( Tab );
     Liberation_Netlist( Net );
     free( nom_fichier);
+    free( nom_fichier_net);
     free( option_scanf );
 }
 
