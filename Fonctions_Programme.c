@@ -120,7 +120,9 @@ void Debug(){
     Net = Recuperer_Netlist( nom_fichier_net );
     nombre_segments = nb_segment( Net );
     Tableau_segments = Creer_Tableau_Segments_Netlist( Net , nombre_segments );
-    Intersection_Balayage_Avl( Net , nombre_segments , Tableau_segments );
+    //Intersection_Balayage_Avl( Net , nombre_segments , Tableau_segments );
+    //Intersection_Balayage_Liste_Chainee( Net , nombre_segments , Tableau_segments );
+    intersec_naif( Tableau_segments  , nombre_segments , Net);
     Sauvegarde_intersection( Tableau_segments , nombre_segments , nom_fichier_int );
 
     Liberation_Netlist( Net );
