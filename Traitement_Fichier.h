@@ -7,3 +7,5 @@ Netlist * Recuperer_Netlist( char * nom_fichier_en_net ) ;
 
 /* Fonctions d'affichage de la structure netlist sous forme de .net */
 void print_netlist(Netlist* n, char* name);
+
+void Sauvegarde_intersection(Segment* *segp, int NbSeg, char* name);
