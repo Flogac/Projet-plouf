@@ -41,6 +41,7 @@ void VisuNetList(void){
 void Faire_Test_Intersection(){
     Netlist * Net;
     char * nom_fichier;
+    char * nom_fichier_net;
     char * option_scanf;
     Segment * * Tab;
     int nombre_segments;
@@ -49,9 +50,10 @@ void Faire_Test_Intersection(){
     printf( "alorithmes de calcul d'intersection.");
 
     option_scanf = ( char * ) malloc ( sizeof( char ) * 256 );
-    nom_fichier = Lire_Entree_Standard( ".net" );
+    nom_fichier = demande_nom_fichier( NULL );
+    nom_fichier_net = ajout_extension_nom_fichier( nom_fichier , ".net" );
 
-    Net = Recuperer_Netlist( nom_fichier );
+    Net = Recuperer_Netlist( nom_fichier_net );
     printf( "Quel algorithme voulez-vous utiliser pour le premier test?\n");
     printf("1 : Naïf\n2 : Balayage par liste chaînée\n3 : Balayage par AVL\n");
     scanf( "%s" , option_scanf );
@@ -74,7 +76,7 @@ void Faire_Test_Intersection(){
     free( nom_fichier);
     free( option_scanf );
 
-    Net = Recuperer_Netlist( nom_fichier );
+    Net = Recuperer_Netlist( nom_fichier_net );
     printf( "Quel algorithme voulez-vous utiliser pour le second test?\n");
     printf("1 : Naïf\n2 : Balayage par liste chaînée\n3 : Balayage par AVL\n");
     scanf( "%s" , option_scanf );
