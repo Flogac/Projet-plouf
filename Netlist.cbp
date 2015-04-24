@@ -39,6 +39,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Graphe.h" />
+		<Unit filename="Lecture_fichier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Lecture_fichier.h" />
+		<Unit filename="Traitement_Fichier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Traitement_Fichier.h" />
 		<Unit filename="Traitement_Netlist.c">
 			<Option compilerVar="CC" />
 		</Unit>
