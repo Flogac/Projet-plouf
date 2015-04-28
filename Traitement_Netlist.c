@@ -36,8 +36,13 @@ void intersec_naif( Segment * * Tableau_Segments , int nombre_segments , Netlist
     if( !Tableau_Segments || nombre_segments < 1 ) return;
 
     int i, j;
+    //int debug = 1;
 
-    for( i = 0 ; i < nombre_segments ; i++ ) for( j = i ; j < nombre_segments ; j++ ) if( intersection( Net , Tableau_Segments[i] , Tableau_Segments[j] ) == 1 ) Creer_intersection( Tableau_Segments[i] , Tableau_Segments[j] );
+    for( i = 0 ; i < nombre_segments ; i++ )
+        for( j = i ; j < nombre_segments ; j++ )
+            if( intersection( Net , Tableau_Segments[i] , Tableau_Segments[j] ) == 1 )
+                /*if( debug++ )*/ Creer_intersection( Tableau_Segments[i] , Tableau_Segments[j] );
+    //printf( "%d\n" , debug );
 }
 
 /*
